@@ -1,0 +1,133 @@
+.scm-page {
+  position: relative;
+  min-height: 100svh;
+  background: var(--bg-page);
+  color: var(--text-1);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── class row ─────────────────────────────────────────────────────────────── */
+.scm-class-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.scm-class-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.scm-class-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-1);
+}
+
+.scm-persons-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.scm-badge-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.scm-badge-group-label {
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+.scm-person-badge {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.scm-person-badge--teacher {
+  background: var(--accent-a8);
+  border: 1px solid var(--border-2);
+  color: var(--accent);
+}
+
+.scm-person-badge--student {
+  background: var(--accent-a8);
+  border: 1px solid var(--accent-a8);
+  color: var(--accent);
+}
+
+/* ── form body ─────────────────────────────────────────────────────────────── */
+.scm-form-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.scm-person-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.scm-person-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.scm-person-group-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.scm-add-person-btn {
+  background: transparent;
+  border: 1px dashed var(--border-2);
+  color: var(--accent);
+  font-size: 13px;
+  padding: 4px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.scm-add-person-btn:hover { border-color: var(--accent); background: var(--accent-a4); }
+
+.scm-person-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.scm-person-input {
+  flex: 1;
+  padding: 8px 14px;
+  font-size: 14px;
+}
+
+.scm-person-name {
+  flex: 1;
+  font-size: 14px;
+  color: var(--text-1);
+}
+
+.scm-teacher-select {
+  margin-top: 4px;
+}
+
+.scm-hint {
+  font-size: 13px;
+  color: var(--text-3);
+  font-style: italic;
+}

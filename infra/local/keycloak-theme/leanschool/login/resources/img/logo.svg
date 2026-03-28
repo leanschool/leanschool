@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 130" width="540" height="130">
+  <defs>
+
+    <!-- Badge gradient: forest green → deep green -->
+    <linearGradient id="badgeGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#4a7459"/>
+      <stop offset="100%" stop-color="#22382a"/>
+    </linearGradient>
+
+    <!-- Accent line gradient: amber fade -->
+    <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#f0b07a"/>
+      <stop offset="100%" stop-color="#c96820" stop-opacity="0"/>
+    </linearGradient>
+
+  </defs>
+
+  <!-- ═══════════════════════════════════════════════
+       ICON BADGE
+       ═══════════════════════════════════════════════ -->
+
+  <!-- Badge body -->
+  <rect x="4" y="4" width="122" height="122" rx="26"
+        fill="url(#badgeGrad)"/>
+
+  <!-- Subtle inner border -->
+  <rect x="4" y="4" width="122" height="122" rx="26"
+        fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.12"/>
+
+  <!-- ── Flat receipt / list mark ── -->
+  <!-- Line 1 (long) -->
+  <rect x="30" y="34" width="70" height="9" rx="4.5" fill="white" opacity="0.95"/>
+  <!-- Line 2 (medium) -->
+  <rect x="30" y="51" width="52" height="9" rx="4.5" fill="white" opacity="0.80"/>
+  <!-- Line 3 (long) -->
+  <rect x="30" y="68" width="70" height="9" rx="4.5" fill="white" opacity="0.80"/>
+  <!-- Divider -->
+  <rect x="30" y="84" width="70" height="1.5" fill="white" opacity="0.20"/>
+  <!-- Total line -->
+  <rect x="30" y="92" width="44" height="9" rx="4.5" fill="white"/>
+  <!-- Total value (amber accent) -->
+  <rect x="80" y="92" width="20" height="9" rx="4.5" fill="#f0b07a" opacity="0.90"/>
+
+  <!-- ═══════════════════════════════════════════════
+       WORDMARK
+       ═══════════════════════════════════════════════
+       "lean"   — weight 200, soft green = lightweight / efficient
+       "school" — weight 800, warm white = solid / foundational
+  -->
+  <text x="148" y="84"
+        font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+        font-size="56" letter-spacing="-2.5">
+
+    <tspan font-weight="200" fill="#96b8a2">lean</tspan><tspan
+           font-weight="800" fill="#f4f8f5">school</tspan>
+
+  </text>
+
+  <!-- Subtle amber accent line under wordmark -->
+  <line x1="148" y1="93" x2="530" y2="93"
+        stroke="url(#lineGrad)" stroke-width="1.5" opacity="0.40"/>
+
+</svg>

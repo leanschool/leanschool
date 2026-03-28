@@ -1,0 +1,142 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "receipt-reader API",
+    "description": "Extracts structured receipt data from images using Tesseract OCR.",
+    "version": "0.1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8081",
+      "description": "local"
+    }
+  ],
+  "paths": {
+    "/receipts/extract": {
+      "post": {
+        "summary": "Extract receipt data from an image",
+        "operationId": "extractReceipt",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "image": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "owner": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "image"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Extracted receipt",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Receipt"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Extraction failed"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Receipt": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReceiptItem"
+            }
+          },
+          "receiptOwnerId": {
+            "type": "string",
+            "example": "user-42"
+          },
+          "taxes": {
+            "type": "number",
+            "format": "double",
+            "example": 1.04
+          },
+          "time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "totalPrice": {
+            "type": "number",
+            "format": "double",
+            "example": 12.99
+          }
+        },
+        "required": [
+          "receiptOwnerId",
+          "totalPrice",
+          "taxes",
+          "time",
+          "items"
+        ]
+      },
+      "ReceiptItem": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "format": "double",
+            "example": 2
+          },
+          "name": {
+            "type": "string",
+            "example": "Milk"
+          },
+          "price": {
+            "type": "number",
+            "format": "double",
+            "example": 1.49
+          }
+        },
+        "required": [
+          "name",
+          "amount",
+          "price"
+        ]
+      }
+    },
+    "securitySchemes": {
+      "keycloak": {
+        "type": "openIdConnect",
+        "description": "Keycloak OpenID Connect — JWT bearer token with realm_access roles (receipt_reader_read, receipt_reader_write)",
+        "openIdConnectUrl": "http://localhost:8180/realms/leanschool/.well-known/openid-configuration"
+      }
+    }
+  },
+  "security": [
+    {
+      "keycloak": []
+    }
+  ]
+}

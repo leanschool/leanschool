@@ -1,0 +1,8 @@
+package: api
+generate:
+  std-http-server: true
+  strict-server: true
+  models: true
+output: internal/api/server.gen.go
+output-options:
+  name-normalizer: ToCamelCaseWithInitialisms

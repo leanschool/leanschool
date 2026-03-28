@@ -1,0 +1,100 @@
+.cv-filter-btn {
+  padding: 4px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border-2);
+  background: transparent;
+  color: var(--text-2);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.12s;
+}
+.cv-filter-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.cv-active {
+  background: var(--accent);
+  color: var(--on-accent);
+  border-color: var(--accent);
+}
+.cv-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.cv-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-1);
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+.cv-card-header {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.cv-severity {
+  padding: 1px 8px;
+  border-radius: 10px;
+  color: var(--on-accent);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.cv-type {
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text-1);
+  text-transform: capitalize;
+}
+.cv-desc {
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: var(--text-2);
+}
+.cv-entries {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.cv-entry-link {
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border-2);
+  background: transparent;
+  color: var(--accent);
+  font-size: 11px;
+  cursor: pointer;
+}
+.cv-entry-link:hover {
+  background: var(--accent-a4);
+}
+.cv-container {
+  padding: 24px;
+}
+.cv-header {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.cv-title {
+  margin: 0;
+  color: var(--text-1);
+}
+.cv-count {
+  font-size: 13px;
+  color: var(--text-3);
+}
+.cv-filter-group {
+  margin-left: auto;
+  display: flex;
+  gap: 4px;
+}
+.cv-no-conflicts {
+  text-align: center;
+  padding: 48px;
+  color: var(--ok);
+  font-size: 15px;
+}

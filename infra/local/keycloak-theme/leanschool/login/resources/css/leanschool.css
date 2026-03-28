@@ -1,0 +1,335 @@
+/* ── leanschool Keycloak login theme ─────────────────────────────────────── */
+
+/* ── Page background ──────────────────────────────────────────────────────── */
+html,
+body,
+.login-pf,
+.pf-v5-c-login,
+.pf-c-login {
+  background: #fafaf9 !important;    /* stone-50 */
+  font-family: 'Inter', system-ui, 'Segoe UI', sans-serif !important;
+  min-height: 100vh;
+}
+
+/* Subtle radial tint behind the card */
+body::before {
+  content: '';
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(58, 92, 70, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Outer layout centering ───────────────────────────────────────────────── */
+.pf-v5-c-login__container,
+.pf-c-login__container,
+.login-pf-page .container-fluid {
+  background: transparent !important;
+}
+
+/* ── Logo header ─────────────────────────────────────────────────────────── */
+#kc-header,
+.pf-v5-c-login__header,
+.pf-c-login__header {
+  background: transparent !important;
+  padding-bottom: 0 !important;
+}
+
+#kc-header-wrapper,
+.pf-v5-c-login__header *,
+.pf-c-login__header * {
+  display: none !important;   /* hide realm text */
+}
+
+#kc-header::before,
+.pf-v5-c-login__header::before,
+.pf-c-login__header::before {
+  content: '';
+  display: block;
+  width: 270px;
+  height: 65px;
+  margin: 0 auto 8px;
+  background: url('../img/logo.svg') center/contain no-repeat;
+}
+
+/* ── Login card ───────────────────────────────────────────────────────────── */
+#kc-content,
+.card-pf,
+.pf-v5-c-login__main,
+.pf-c-login__main {
+  background: #ffffff !important;
+  border: 1px solid #e7e5e4 !important;    /* stone-200 */
+  border-radius: 24px !important;
+  box-shadow:
+    0 2px 8px rgba(28, 25, 23, 0.08),
+    0 8px 32px rgba(28, 25, 23, 0.08) !important;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* ── Card title ───────────────────────────────────────────────────────────── */
+#kc-page-title,
+.pf-v5-c-login__main-header .pf-v5-c-title,
+.pf-c-login__main-header .pf-c-title,
+h1.pf-v5-c-title,
+h1.pf-c-title {
+  color: #1c1917 !important;             /* stone-900 */
+  font-weight: 600 !important;
+  font-size: 22px !important;
+  letter-spacing: -0.3px !important;
+}
+
+/* ── Form layout: spacing between groups ──────────────────────────────────── */
+.pf-v5-c-form__group,
+.pf-c-form__group {
+  margin-bottom: 18px !important;
+}
+
+/* ── Form labels ──────────────────────────────────────────────────────────── */
+label,
+.pf-v5-c-form__label,
+.pf-c-form__label,
+.pf-v5-c-form__label-text,
+.pf-c-form__label-text {
+  color: #78716c !important;             /* stone-500 */
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.3px !important;
+  padding-bottom: 6px !important;
+  display: inline-block !important;
+}
+
+/* ── Inputs ───────────────────────────────────────────────────────────────── */
+input[type='text'],
+input[type='password'],
+input[type='email'],
+.pf-v5-c-form-control,
+.pf-c-form-control {
+  background: #f5f4f2 !important;        /* stone-100 */
+  border: 1px solid #e7e5e4 !important;  /* stone-200 */
+  border-radius: 10px !important;
+  color: #1c1917 !important;             /* stone-900 */
+  padding: 11px 14px !important;
+  transition: border-color 0.2s, box-shadow 0.2s !important;
+  font-size: 14px !important;
+}
+
+input[type='text']:focus,
+input[type='password']:focus,
+input[type='email']:focus,
+.pf-v5-c-form-control:focus,
+.pf-c-form-control:focus {
+  border-color: #3a5c46 !important;      /* green-600 */
+  box-shadow: 0 0 0 2px rgba(58, 92, 70, 0.15) !important;
+  outline: none !important;
+}
+
+/* ── Password reveal / input group ───────────────────────────────────────── */
+.pf-v5-c-input-group,
+.pf-c-input-group {
+  background: #f5f4f2 !important;        /* stone-100 */
+  border: 1px solid #e7e5e4 !important;  /* stone-200 */
+  border-radius: 10px !important;
+  overflow: hidden !important;
+  transition: border-color 0.2s, box-shadow 0.2s !important;
+  display: flex !important;
+}
+
+.pf-v5-c-input-group:focus-within,
+.pf-c-input-group:focus-within {
+  border-color: #3a5c46 !important;      /* green-600 */
+  box-shadow: 0 0 0 2px rgba(58, 92, 70, 0.15) !important;
+}
+
+/* Remove child borders – the group border handles it */
+.pf-v5-c-input-group input,
+.pf-v5-c-input-group .pf-v5-c-form-control,
+.pf-c-input-group input,
+.pf-c-input-group .pf-c-form-control {
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  flex: 1 !important;
+}
+
+/* The reveal toggle button */
+.pf-v5-c-input-group .pf-v5-c-button,
+.pf-c-input-group .pf-c-button {
+  background: transparent !important;
+  border: none !important;
+  border-left: 1px solid #e7e5e4 !important;  /* stone-200 */
+  border-radius: 0 !important;
+  color: #78716c !important;                   /* stone-500 */
+  padding: 0 12px !important;
+  cursor: pointer !important;
+  transition: color 0.15s, background 0.15s !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.pf-v5-c-input-group .pf-v5-c-button:hover,
+.pf-c-input-group .pf-c-button:hover {
+  background: rgba(58, 92, 70, 0.06) !important;
+  color: #3a5c46 !important;                   /* green-600 */
+}
+
+/* ── Primary button ───────────────────────────────────────────────────────── */
+.btn-primary,
+input[type='submit'],
+button[type='submit'],
+.pf-v5-c-button.pf-m-primary,
+.pf-c-button.pf-m-primary {
+  background: linear-gradient(135deg, #3a5c46, #22382a) !important;  /* green-600 → green-800 */
+  border: none !important;
+  border-radius: 12px !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  padding: 12px 24px !important;
+  box-shadow: 0 2px 8px rgba(58, 92, 70, 0.30) !important;
+  transition: all 0.2s !important;
+  cursor: pointer !important;
+}
+
+.btn-primary:hover,
+input[type='submit']:hover,
+button[type='submit']:hover,
+.pf-v5-c-button.pf-m-primary:hover,
+.pf-c-button.pf-m-primary:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 16px rgba(58, 92, 70, 0.40) !important;
+}
+
+/* ── Links ────────────────────────────────────────────────────────────────── */
+a,
+.pf-v5-c-login__main-footer-links-item-link {
+  color: #3a5c46 !important;             /* green-600 */
+  text-decoration: none !important;
+}
+
+a:hover {
+  color: #22382a !important;             /* green-800 */
+  text-decoration: underline !important;
+}
+
+/* ── Dividers & helper text ───────────────────────────────────────────────── */
+.pf-v5-c-divider,
+.pf-c-divider,
+hr {
+  border-color: #e7e5e4 !important;      /* stone-200 */
+}
+
+.pf-v5-c-helper-text__item-text,
+.pf-c-helper-text__item-text,
+small,
+.helper-text {
+  color: #78716c !important;             /* stone-500 */
+}
+
+/* ── Alert / error ────────────────────────────────────────────────────────── */
+.alert-error,
+.pf-v5-c-alert.pf-m-danger,
+.pf-c-alert.pf-m-danger,
+#kc-error-message {
+  background: rgba(220, 38, 38, 0.08) !important;
+  border: 1px solid rgba(220, 38, 38, 0.25) !important;
+  border-radius: 10px !important;
+  color: #dc2626 !important;
+}
+
+/* ── Footer text ──────────────────────────────────────────────────────────── */
+.pf-v5-c-login__footer,
+.pf-c-login__footer,
+#kc-info {
+  color: #78716c !important;             /* stone-500 */
+}
+
+/* ── "Remember me" checkbox label ─────────────────────────────────────────── */
+.pf-v5-c-check__label,
+.pf-c-check__label,
+#rememberMe + label {
+  color: #78716c !important;             /* stone-500 */
+}
+
+/* ── Footer wrapper ───────────────────────────────────────────────────────── */
+.pf-v5-c-login__main-footer,
+.pf-c-login__main-footer,
+.pf-v5-c-login__main-footer-links,
+.pf-c-login__main-footer-links,
+.pf-v5-c-login__main-body,
+.pf-c-login__main-body {
+  background: transparent !important;
+}
+
+/* ── "New user? Register" band ────────────────────────────────────────────── */
+#kc-registration,
+#kc-registration-container,
+.pf-v5-c-login__main-footer-band,
+.pf-c-login__main-footer-band {
+  background: rgba(244, 248, 245, 0.7) !important;   /* green-50 */
+  border-top: 1px solid #e7e5e4 !important;           /* stone-200 */
+  padding: 14px 24px !important;
+}
+
+#kc-registration span,
+#kc-registration-container span,
+.pf-v5-c-login__main-footer-band p,
+.pf-c-login__main-footer-band p {
+  color: #78716c !important;             /* stone-500 */
+  font-size: 13px !important;
+}
+
+#kc-registration a,
+#kc-registration-container a {
+  color: #3a5c46 !important;             /* green-600 */
+  font-size: 13px !important;
+}
+
+#kc-registration a:hover,
+#kc-registration-container a:hover {
+  color: #22382a !important;             /* green-800 */
+}
+
+/* ── Register / sign-up page ──────────────────────────────────────────────── */
+#kc-register-form .pf-v5-c-form__group,
+#kc-register-form .pf-c-form__group,
+.register-pf-page .form-group {
+  margin-bottom: 16px !important;
+}
+
+/* Section headings inside the register form */
+#kc-register-form fieldset legend,
+.register-pf-page fieldset legend {
+  color: #78716c !important;             /* stone-500 */
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.8px !important;
+  text-transform: uppercase !important;
+  margin-bottom: 12px !important;
+  border-bottom: 1px solid #e7e5e4 !important;   /* stone-200 */
+  padding-bottom: 6px !important;
+}
+
+.register-pf body,
+body.register-pf {
+  background: #fafaf9 !important;        /* stone-50 */
+}
+
+/* Back-to-login link on the register page */
+#kc-form-options a,
+.pf-v5-c-login__main-footer-links a {
+  color: #3a5c46 !important;             /* green-600 */
+  font-size: 13px !important;
+}
+
+#kc-form-options a:hover,
+.pf-v5-c-login__main-footer-links a:hover {
+  color: #22382a !important;             /* green-800 */
+}

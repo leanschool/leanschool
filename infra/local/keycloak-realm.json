@@ -1,0 +1,306 @@
+{
+  "id": "leanschool",
+  "realm": "leanschool",
+  "displayName": "LeanSchool",
+  "enabled": true,
+  "loginTheme": "leanschool",
+  "sslRequired": "none",
+  "registrationAllowed": true,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": false,
+  "editUsernameAllowed": false,
+  "bruteForceProtected": false,
+  "accessTokenLifespan": 300,
+  "roles": {
+    "realm": [
+      {
+        "name": "teacher",
+        "description": "Teacher role — can scan and submit receipts",
+        "composite": true,
+        "clientRole": false,
+        "attributes": { "registration_selectable": ["true"] },
+        "composites": {
+          "realm": [
+            "leanschool_read", "leanschool_write",
+            "file_service_read", "file_service_write",
+            "receipt_reader_read", "receipt_reader_write",
+            "ollama_receipt_reader_read", "ollama_receipt_reader_write",
+            "extraction_read", "extraction_write",
+            "location_read", "building_read", "room_read", "postalcode_read", "city_read", "address_read",
+            "person_read", "guardian_read", "teacher_read", "student_read",
+            "schoolyear_read", "schoolclass_read", "curriculum_read", "subject_read",
+            "lesson_read", "exam_read", "grade_read",
+            "receipt_read",
+            "teacher_write_own", "schoolclass_write_own", "lesson_write_own", "exam_write_own", "grade_write_own",
+            "timetable_read", "timetable_write", "timetable_resolve"
+          ]
+        }
+      },
+      {
+        "name": "school-management",
+        "description": "Management role — can review receipts and manage accounts",
+        "composite": true,
+        "clientRole": false,
+        "attributes": { "registration_selectable": ["true"] },
+        "composites": {
+          "realm": [
+            "leanschool_read", "leanschool_write",
+            "file_service_read", "file_service_write",
+            "extraction_read", "extraction_write",
+            "location_read", "building_read", "room_read", "postalcode_read", "city_read", "address_read",
+            "person_read", "guardian_read", "teacher_read", "student_read",
+            "schoolyear_read", "schoolclass_read", "curriculum_read", "subject_read",
+            "lesson_read", "exam_read", "grade_read",
+            "location_write", "building_write", "room_write", "postalcode_write", "city_write", "address_write",
+            "person_write", "guardian_write", "student_write", "schoolyear_write", "curriculum_write", "subject_write",
+            "teacher_write_all", "schoolclass_write_all", "lesson_write_all", "exam_write_all", "grade_write_all",
+            "account_read", "account_write",
+            "receipt_read", "receipt_write",
+            "timetable_read", "timetable_write", "timetable_resolve"
+          ]
+        }
+      },
+      { "name": "social-worker",           "description": "Social worker role",                    "composite": true, "clientRole": false, "attributes": { "registration_selectable": ["true"] }, "composites": { "realm": ["timetable_read", "timetable_write", "timetable_resolve"] } },
+      { "name": "individual-instruction",  "description": "Individual instruction role",            "composite": true, "clientRole": false, "attributes": { "registration_selectable": ["true"] }, "composites": { "realm": ["timetable_read", "timetable_write", "timetable_resolve"] } },
+      { "name": "speech-therapy",          "description": "Speech therapy role",                   "composite": true, "clientRole": false, "attributes": { "registration_selectable": ["true"] }, "composites": { "realm": ["timetable_read", "timetable_write", "timetable_resolve"] } },
+      { "name": "child-guidance",          "description": "Child guidance role",                   "composite": false, "clientRole": false, "attributes": { "registration_selectable": ["true"] } },
+      { "name": "psychomotor-therapy",     "description": "Psychomotor therapy role",              "composite": true, "clientRole": false, "attributes": { "registration_selectable": ["true"] }, "composites": { "realm": ["timetable_read", "timetable_write", "timetable_resolve"] } },
+      { "name": "school-secretariat",      "description": "School secretariat role",               "composite": false, "clientRole": false, "attributes": { "registration_selectable": ["true"] } },
+      { "name": "municipal-secretariat",   "description": "Municipal secretariat role",            "composite": false, "clientRole": false, "attributes": { "registration_selectable": ["true"] } },
+      { "name": "admin",                   "description": "Administrator role — full access",      "composite": false, "clientRole": false, "attributes": { "registration_selectable": ["true"] } },
+      { "name": "leanschool_read",              "description": "Read access to leanschool service",              "composite": false, "clientRole": false },
+      { "name": "leanschool_write",             "description": "Write access to leanschool service",             "composite": false, "clientRole": false },
+      { "name": "file_service_read",            "description": "Read access to file-service",                    "composite": false, "clientRole": false },
+      { "name": "file_service_write",           "description": "Write access to file-service",                   "composite": false, "clientRole": false },
+      { "name": "receipt_reader_read",          "description": "Read access to receipt-reader service",          "composite": false, "clientRole": false },
+      { "name": "receipt_reader_write",         "description": "Write access to receipt-reader service",         "composite": false, "clientRole": false },
+      { "name": "ollama_receipt_reader_read",   "description": "Read access to ollama-receipt-reader service",   "composite": false, "clientRole": false },
+      { "name": "ollama_receipt_reader_write",  "description": "Write access to ollama-receipt-reader service",  "composite": false, "clientRole": false },
+      { "name": "extraction_read",              "description": "Read access to extraction service",              "composite": false, "clientRole": false },
+      { "name": "extraction_write",             "description": "Write access to extraction service",             "composite": false, "clientRole": false },
+      { "name": "user_management",              "description": "Can approve or deny user registration requests",  "composite": true, "clientRole": false, "composites": { "realm": ["user_registry_read", "registration_workflow_read", "role_mapping_read"] } },
+      { "name": "user_management_read",           "description": "Read access to user management",                     "composite": false, "clientRole": false },
+      { "name": "user_management_write",          "description": "Write access to user management",                    "composite": true, "clientRole": false, "composites": { "realm": ["user_registry_write", "registration_workflow_write", "role_mapping_write"] } },
+      { "name": "user_registry_read",             "description": "Read access to user registry",                      "composite": false, "clientRole": false },
+      { "name": "user_registry_write",            "description": "Write access to user registry",                     "composite": false, "clientRole": false },
+      { "name": "registration_workflow_read",    "description": "Read access to registration workflows",            "composite": false, "clientRole": false },
+      { "name": "registration_workflow_write",   "description": "Write access to registration workflows",           "composite": false, "clientRole": false },
+      { "name": "role_mapping_read",              "description": "Read access to role mappings",                      "composite": false, "clientRole": false },
+      { "name": "role_mapping_write",             "description": "Write access to role mappings",                     "composite": false, "clientRole": false },
+
+      { "name": "location_read",    "description": "Read access to locations",    "composite": false, "clientRole": false },
+      { "name": "location_write",   "description": "Write access to locations",   "composite": false, "clientRole": false },
+      { "name": "building_read",    "description": "Read access to buildings",    "composite": false, "clientRole": false },
+      { "name": "building_write",   "description": "Write access to buildings",   "composite": false, "clientRole": false },
+      { "name": "room_read",        "description": "Read access to rooms",        "composite": false, "clientRole": false },
+      { "name": "room_write",       "description": "Write access to rooms",       "composite": false, "clientRole": false },
+      { "name": "postalcode_read",  "description": "Read access to postal codes", "composite": false, "clientRole": false },
+      { "name": "postalcode_write", "description": "Write access to postal codes","composite": false, "clientRole": false },
+      { "name": "city_read",        "description": "Read access to cities",       "composite": false, "clientRole": false },
+      { "name": "city_write",       "description": "Write access to cities",      "composite": false, "clientRole": false },
+      { "name": "address_read",     "description": "Read access to addresses",    "composite": false, "clientRole": false },
+      { "name": "address_write",    "description": "Write access to addresses",   "composite": false, "clientRole": false },
+      { "name": "person_read",      "description": "Read access to persons",      "composite": false, "clientRole": false },
+      { "name": "person_write",     "description": "Write access to persons",     "composite": false, "clientRole": false },
+      { "name": "guardian_read",    "description": "Read access to guardians",    "composite": false, "clientRole": false },
+      { "name": "guardian_write",   "description": "Write access to guardians",   "composite": false, "clientRole": false },
+      { "name": "teacher_read",       "description": "Read access to teachers",              "composite": false, "clientRole": false },
+      { "name": "teacher_write_own", "description": "Write own teacher records",             "composite": false, "clientRole": false, "containerId": "leanschool" },
+      { "name": "teacher_write_all", "description": "Write all teacher records",             "composite": false, "clientRole": false, "containerId": "leanschool" },
+      { "name": "student_read",     "description": "Read access to students",     "composite": false, "clientRole": false },
+      { "name": "student_write",    "description": "Write access to students",    "composite": false, "clientRole": false },
+      { "name": "schoolyear_read",  "description": "Read access to school years", "composite": false, "clientRole": false },
+      { "name": "schoolyear_write", "description": "Write access to school years","composite": false, "clientRole": false },
+      { "name": "schoolclass_read",       "description": "Read access to school classes",         "composite": false, "clientRole": false },
+      { "name": "schoolclass_write_own",  "description": "Write own school class records",          "composite": false, "clientRole": false, "containerId": "leanschool" },
+      { "name": "schoolclass_write_all",  "description": "Write all school class records",          "composite": false, "clientRole": false, "containerId": "leanschool" },
+      { "name": "curriculum_read",  "description": "Read access to curricula",    "composite": false, "clientRole": false },
+      { "name": "curriculum_write", "description": "Write access to curricula",   "composite": false, "clientRole": false },
+      { "name": "subject_read",     "description": "Read access to subjects",     "composite": false, "clientRole": false },
+      { "name": "subject_write",    "description": "Write access to subjects",    "composite": false, "clientRole": false },
+      { "name": "lesson_read",       "description": "Read access to lessons",               "composite": false, "clientRole": false },
+      { "name": "lesson_write_own", "description": "Write own lesson records",              "composite": false, "clientRole": false, "containerId": "leanschool" },
+      { "name": "lesson_write_all", "description": "Write all lesson records",              "composite": false, "clientRole": false, "containerId": "leanschool" },
+      { "name": "exam_read",         "description": "Read access to exams",                 "composite": false, "clientRole": false },
+      { "name": "exam_write_own",   "description": "Write own exam records",               "composite": false, "clientRole": false, "containerId": "leanschool" },
+      { "name": "exam_write_all",   "description": "Write all exam records",               "composite": false, "clientRole": false, "containerId": "leanschool" },
+      { "name": "grade_read",        "description": "Read access to grades",                "composite": false, "clientRole": false },
+      { "name": "grade_write_own",  "description": "Write own grade records",               "composite": false, "clientRole": false, "containerId": "leanschool" },
+      { "name": "grade_write_all",  "description": "Write all grade records",               "composite": false, "clientRole": false, "containerId": "leanschool" },
+      { "name": "account_read",      "description": "Read access to accounts",                            "composite": false, "clientRole": false },
+      { "name": "account_write",     "description": "Write access to accounts",                           "composite": false, "clientRole": false },
+      { "name": "receipt_read",      "description": "Read access to receipts",                            "composite": false, "clientRole": false },
+      { "name": "receipt_write",     "description": "Write access to receipts",                           "composite": false, "clientRole": false },
+      { "name": "timetable_read",    "description": "Read access to timetable service",                   "composite": false, "clientRole": false },
+      { "name": "timetable_write",   "description": "Write access to timetable service (school-management)", "composite": false, "clientRole": false },
+      { "name": "timetable_resolve", "description": "Resolve timetable conflicts (teachers)",             "composite": false, "clientRole": false }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "leanschool-ui",
+      "name": "LeanSchool UI",
+      "description": "Public PKCE client for the React front-end",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false,
+      "redirectUris": [
+        "http://localhost:3000",
+        "http://localhost:3000/*",
+        "http://localhost:5173",
+        "http://localhost:5173/*"
+      ],
+      "webOrigins": [
+        "http://localhost:3000",
+        "http://localhost:5173"
+      ],
+      "attributes": {
+        "pkce.code.challenge.method": "S256"
+      }
+    },
+    {
+      "clientId": "leanschool-service",
+      "name": "LeanSchool Service",
+      "description": "Confidential client for the leanschool backend",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "standardFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": true,
+      "secret": "leanschool-secret"
+    },
+    {
+      "clientId": "file-service-client",
+      "name": "File Service",
+      "description": "Confidential client for the file-service backend",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "standardFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": true,
+      "secret": "file-service-secret"
+    },
+    {
+      "clientId": "receipt-reader-client",
+      "name": "Receipt Reader",
+      "description": "Confidential client for the receipt-reader backend",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "standardFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": true,
+      "secret": "receipt-reader-secret"
+    },
+    {
+      "clientId": "ollama-reader-client",
+      "name": "Ollama Receipt Reader",
+      "description": "Confidential client for the ollama-receipt-reader backend",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "standardFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": true,
+      "secret": "ollama-reader-secret"
+    },
+    {
+      "clientId": "extraction-service-client",
+      "name": "Extraction Service",
+      "description": "Confidential client for the extraction-service backend",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "standardFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": true,
+      "secret": "extraction-service-secret"
+    },
+    {
+      "clientId": "timetable-service-client",
+      "name": "Timetable Service",
+      "enabled": true,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "timetable-service-secret",
+      "bearerOnly": false,
+      "consentRequired": false,
+      "standardFlowEnabled": false,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": true,
+      "publicClient": false,
+      "protocol": "openid-connect",
+      "fullScopeAllowed": true
+    }
+  ],
+  "users": [
+    {
+      "username": "teacher",
+      "email": "teacher@leanschool.local",
+      "firstName": "Teacher",
+      "lastName": "User",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        { "type": "password", "value": "teacher", "temporary": false }
+      ],
+      "realmRoles": ["teacher"]
+    },
+    {
+      "username": "manager",
+      "email": "manager@leanschool.local",
+      "firstName": "Manager",
+      "lastName": "User",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        { "type": "password", "value": "manager", "temporary": false }
+      ],
+      "realmRoles": ["school-management", "user_management", "user_management_read", "user_management_write"]
+    },
+    {
+      "username": "service-account-leanschool-service",
+      "enabled": true,
+      "serviceAccountClientId": "leanschool-service",
+      "clientRoles": {
+        "realm-management": ["view-realm", "query-roles", "manage-users", "query-users"]
+      }
+    },
+    {
+      "username": "service-account-timetable-service-client",
+      "enabled": true,
+      "serviceAccountClientId": "timetable-service-client",
+      "realmRoles": ["leanschool_read", "leanschool_write"]
+    },
+    {
+      "username": "admin",
+      "email": "admin@leanschool.local",
+      "firstName": "Admin",
+      "lastName": "User",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        { "type": "password", "value": "admin", "temporary": false }
+      ],
+      "realmRoles": [
+        "user_management",
+        "user_management_write",
+        "user_registry_read",
+        "user_registry_write",
+        "registration_workflow_read",
+        "registration_workflow_write",
+        "role_mapping_read",
+        "role_mapping_write",
+        "leanschool_read",
+        "leanschool_write"
+      ]
+    }
+  ]
+}

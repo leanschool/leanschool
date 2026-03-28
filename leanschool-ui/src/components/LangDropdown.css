@@ -1,0 +1,81 @@
+.lang-dropdown {
+  position: fixed;
+  top: 16px;
+  right: 66px; /* 16px margin + 40px user-btn + 10px gap */
+  z-index: 500;
+}
+
+.lang-dropdown-btn {
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border-2);
+  background: var(--bg-card);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.lang-dropdown-btn:hover {
+  border-color: var(--border-3);
+  box-shadow: var(--shadow-md);
+  color: var(--accent-dk);
+}
+
+.lang-dropdown-caret {
+  font-size: 8px;
+  opacity: 0.6;
+}
+
+.lang-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border-2);
+  border-radius: 14px;
+  padding: 6px;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 130px;
+  animation: langFadeIn 0.15s ease;
+}
+
+@keyframes langFadeIn {
+  from { opacity: 0; transform: translateY(-6px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.lang-dropdown-item {
+  padding: 9px 14px;
+  border-radius: 9px;
+  border: none;
+  background: transparent;
+  color: var(--text-3);
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.lang-dropdown-item:hover {
+  background: var(--bg-hover);
+  color: var(--text-1);
+}
+.lang-dropdown-item.active {
+  color: var(--accent);
+  background: var(--accent-a8);
+}
+
+/* When no user icon is shown (login/loading), shift to right edge */
+.lang-dropdown--solo {
+  right: 16px;
+}

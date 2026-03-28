@@ -1,0 +1,29 @@
+# Build the timetable-service binary
+FROM golang:1.26-alpine AS builder
+
+WORKDIR /app
+
+# Copy go mod files
+COPY timetable-service/go.mod timetable-service/go.sum ./
+RUN go mod download
+
+# Copy source code
+COPY timetable-service/ ./
+
+# Build the binary
+RUN CGO_ENABLED=0 GOOS=linux go build -o timetable-service ./cmd/main.go
+
+# Create the final image
+FROM alpine:latest
+
+WORKDIR /app
+
+# Copy the binary from the builder
+COPY --from=builder /app/timetable-service ./
+
+# Set permissions and run
+RUN chmod +x timetable-service
+
+EXPOSE 8085
+
+CMD ["./timetable-service"]

@@ -1,0 +1,32 @@
+# Build the extraction-service binary
+FROM golang:1.26-alpine AS builder
+
+WORKDIR /app
+
+# Copy go mod files
+COPY extraction-service/go.mod extraction-service/go.sum ./
+RUN go mod download
+
+# Copy source code
+COPY extraction-service/ ./
+
+# Build the binary
+RUN CGO_ENABLED=0 GOOS=linux go build -o extraction-service ./cmd/main.go
+
+# Create the final image
+FROM alpine:latest
+
+WORKDIR /app
+
+# Copy the binary from the builder
+COPY --from=builder /app/extraction-service ./
+
+# Copy the auth middleware (if needed)
+COPY --from=builder /app/internal/handler/auth.go ./
+
+# Set permissions and run
+RUN chmod +x extraction-service
+
+EXPOSE 8084
+
+CMD ["./extraction-service"]

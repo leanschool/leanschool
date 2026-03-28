@@ -1,0 +1,9 @@
+bin/
+testdata/
+.claude/
+infra/k3d
+restrail
+restrail-init.json
+restrail_run_config.json
+receipts_template.xlsx
+todos.md

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Leanschool</string>
+    <string name="title_activity_main">Leanschool</string>
+    <string name="package_name">ch.haebu.leanschool</string>
+    <string name="custom_url_scheme">ch.haebu.leanschool</string>
+</resources>

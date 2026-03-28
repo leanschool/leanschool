@@ -1,0 +1,57 @@
+.ec-card {
+  display: flex;
+  border-radius: 6px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-1);
+  cursor: pointer;
+  overflow: hidden;
+  min-height: 48px;
+  transition: box-shadow 0.15s, border-color 0.15s;
+  user-select: none;
+}
+.ec-card:hover {
+  box-shadow: 0 2px 8px var(--accent-a8);
+}
+.ec-conflict {
+  border-color: var(--error);
+  box-shadow: 0 0 0 2px var(--err-bg);
+}
+.ec-dragging {
+  opacity: 0.4;
+}
+.ec-overlay {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  transform: rotate(2deg);
+  pointer-events: none;
+}
+.ec-color-strip {
+  width: 4px;
+  flex-shrink: 0;
+}
+.ec-content {
+  padding: 4px 8px;
+  min-width: 0;
+  flex: 1;
+}
+.ec-subject {
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--text-1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ec-teacher {
+  font-size: 11px;
+  color: var(--text-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ec-room {
+  font-size: 10px;
+  color: var(--text-3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

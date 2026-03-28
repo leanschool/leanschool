@@ -1,0 +1,101 @@
+.reg-page {
+  min-height: 100svh;
+  background: var(--bg-page);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.reg-card {
+  position: relative;
+  z-index: 1;
+  background: var(--bg-card);
+  border: 1px solid var(--border-1);
+  border-radius: 20px;
+  padding: 2.5rem;
+  width: min(420px, 90vw);
+  box-shadow: var(--shadow-md);
+}
+
+.reg-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-1);
+  margin: 0 0 0.5rem;
+}
+
+.reg-subtitle {
+  color: var(--text-2);
+  font-size: 0.95rem;
+  margin: 0 0 2rem;
+}
+
+.reg-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.reg-fieldset {
+  border: 1px solid var(--border-1);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+}
+
+.reg-legend {
+  color: var(--text-3);
+  font-size: 0.85rem;
+  padding: 0 0.4rem;
+}
+
+.reg-radio-label {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--text-1);
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 0.3rem 0;
+}
+
+.reg-radio-label input[type="radio"] {
+  accent-color: var(--accent);
+  width: 16px;
+  height: 16px;
+}
+
+.reg-field-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  color: var(--text-3);
+  font-size: 0.85rem;
+}
+
+.reg-input {
+  background: var(--bg-input);
+  border: 1px solid var(--border-2);
+  border-radius: 8px;
+  color: var(--text-1);
+  font-size: 0.95rem;
+  padding: 0.6rem 0.85rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.reg-input:focus {
+  border-color: var(--accent);
+}
+
+.reg-error {
+  color: var(--error);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* Status screen utilities (AwaitingApproval, DeniedScreen) */
+.reg-card--center { text-align: center; }
+.reg-status-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+.reg-card .ghost-button { margin-top: 1.5rem; }

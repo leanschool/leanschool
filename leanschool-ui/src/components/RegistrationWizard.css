@@ -1,0 +1,318 @@
+.rw-page {
+  position: relative;
+  min-height: 100vh;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg-page);
+  overflow: auto;
+}
+
+.rw-container {
+  background: var(--bg-card);
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  padding: 2rem;
+  width: 100%;
+  max-width: 600px;
+  position: relative;
+  z-index: 2;
+}
+
+.rw-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.rw-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-1);
+  margin-bottom: 0.5rem;
+}
+
+.rw-progress {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.rw-progress-step {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border-1);
+  transition: all 0.3s ease;
+}
+
+.rw-progress-step-active {
+  background: var(--accent);
+  transform: scale(1.2);
+}
+
+.rw-step {
+  margin-bottom: 2rem;
+}
+
+.rw-step-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-1);
+  margin-bottom: 1rem;
+}
+
+.rw-step-subtitle {
+  color: var(--text-2);
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.rw-role-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.rw-role-card {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--border-1);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: var(--bg-card);
+}
+
+.rw-role-card:hover {
+  border-color: var(--accent);
+  background: var(--bg-card);
+}
+
+.rw-role-card input:checked + .rw-role-content {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.rw-role-checkbox {
+  margin-right: 0.5rem;
+}
+
+.rw-role-content {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.rw-role-name {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.rw-field-label {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.rw-field-label strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.rw-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--border-1);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.rw-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.rw-section {
+  margin-bottom: 1.5rem;
+}
+
+.rw-section-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-2);
+  margin-bottom: 1rem;
+}
+
+.rw-class-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.75rem;
+}
+
+.rw-class-card {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  border: 2px solid var(--border-1);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.rw-class-card:hover {
+  border-color: var(--accent);
+}
+
+.rw-class-card input:checked + .rw-class-name {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.rw-class-checkbox {
+  margin-right: 0.5rem;
+}
+
+.rw-class-name {
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.rw-summary {
+  background: var(--bg-card);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.rw-summary-section {
+  margin-bottom: 1rem;
+}
+
+.rw-summary-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-2);
+  margin-bottom: 0.5rem;
+}
+
+.rw-summary-section p {
+  margin: 0.25rem 0;
+  color: var(--text-2);
+}
+
+.rw-summary-section p strong {
+  color: var(--text-1);
+}
+
+.rw-confirmation-note {
+  color: var(--text-2);
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.rw-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.rw-btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.rw-btn-primary {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.rw-btn-primary:hover:not(:disabled) {
+  background: var(--accent-dk);
+}
+
+.rw-btn-primary:disabled {
+  background: var(--text-3);
+  cursor: not-allowed;
+}
+
+.rw-btn-secondary {
+  background: var(--border-1);
+  color: var(--text-2);
+}
+
+.rw-btn-secondary:hover:not(:disabled) {
+  background: var(--border-2);
+}
+
+.rw-error {
+  color: var(--error);
+  background: var(--err-bg);
+  padding: 0.75rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.rw-hint {
+  color: var(--text-3);
+  font-style: italic;
+}
+
+.rw-info {
+  color: var(--text-2);
+  text-align: center;
+  padding: 1rem;
+}
+
+/* Orb decorations */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-a8), var(--accent-a4));
+  z-index: 1;
+}
+
+.orb-1 {
+  width: 300px;
+  height: 300px;
+  top: -50px;
+  right: -50px;
+}
+
+.orb-2 {
+  width: 200px;
+  height: 200px;
+  bottom: -30px;
+  left: -30px;
+}
+
+@media (max-width: 768px) {
+  .rw-container {
+    padding: 1.5rem;
+  }
+
+  .rw-role-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+
+  .rw-actions {
+    flex-direction: column-reverse;
+  }
+
+  .rw-btn {
+    width: 100%;
+  }
+}

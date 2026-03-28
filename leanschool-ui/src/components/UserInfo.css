@@ -1,0 +1,175 @@
+.userinfo-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(30, 27, 75, 0.2);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 64px 16px 16px;
+  box-sizing: border-box;
+  backdrop-filter: blur(4px);
+}
+
+.userinfo-panel {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-2);
+  border-radius: 20px;
+  padding: 32px 28px;
+  width: min(320px, 100%);
+  max-height: calc(100svh - 80px);
+  overflow-y: auto;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-12px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.userinfo-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  background: none;
+  border: none;
+  color: var(--text-2);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: color 0.15s, background 0.15s;
+}
+.userinfo-close:hover {
+  color: var(--text-1);
+  background: var(--accent-a4);
+}
+
+.userinfo-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-dk));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--on-accent);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 4px;
+}
+
+.userinfo-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-1);
+  text-align: center;
+}
+
+.userinfo-email {
+  font-size: 13px;
+  color: var(--text-2);
+  text-align: center;
+}
+
+.userinfo-roles {
+  width: 100%;
+  margin-top: 4px;
+}
+
+.userinfo-roles-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-3);
+  margin-bottom: 8px;
+}
+
+.userinfo-roles-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.userinfo-role-badge {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: var(--accent-a8);
+  border: 1px solid var(--border-2);
+  color: var(--accent);
+}
+
+.userinfo-edit-btn {
+  margin-top: 8px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border-2);
+  background: transparent;
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.userinfo-edit-btn:hover {
+  border-color: var(--border-3);
+  background: var(--accent-a4);
+}
+
+.userinfo-logout-btn {
+  margin-top: 8px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border-1);
+  background: transparent;
+  color: var(--text-3);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.userinfo-logout-btn:hover {
+  border-color: var(--err-bg);
+  color: var(--error);
+  background: var(--err-bg);
+}
+
+/* ── Floating trigger button (rendered in App) ───────────────────────────── */
+
+.user-icon-btn {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 500;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border-2);
+  background: var(--bg-card);
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.user-icon-btn:hover {
+  border-color: var(--border-3);
+  box-shadow: var(--shadow-md);
+  color: var(--accent-dk);
+}

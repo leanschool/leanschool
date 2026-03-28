@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 44" role="img" aria-label="leanschool · a cooperative">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;800&amp;display=swap');
+      .ls-wordmark { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
+    </style>
+  </defs>
+
+  <!-- Icon mark -->
+  <g transform="translate(0, 8)">
+    <rect x="0" y="0"  width="12" height="12" rx="2.5" fill="#3a5c46"/>
+    <rect x="0" y="16" width="12" height="12" rx="2.5" fill="#2d4a38"/>
+    <rect x="16" y="16" width="12" height="12" rx="2.5" fill="#c96820"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text class="ls-wordmark" x="38" y="26" font-size="22" font-weight="800" letter-spacing="-0.03em">
+    <tspan fill="#1c1917">lean</tspan><tspan fill="#3a5c46">school</tspan>
+  </text>
+
+  <!-- Tagline -->
+  <text class="ls-wordmark" x="38" y="39" font-size="10" font-weight="600" fill="#3a5c46" opacity="0.65" letter-spacing="0.01em">· a cooperative</text>
+</svg>

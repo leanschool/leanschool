@@ -1,0 +1,30 @@
+.theme-toggle {
+  position: fixed;
+  top: 16px;
+  right: 132px;     /* left of lang-dropdown: lang at right:66px ~58px wide + 8px gap */
+  z-index: 1000;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border-2);
+  background: var(--bg-card);
+  color: var(--text-2);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+  transition: all 0.2s;
+}
+
+.theme-toggle:hover {
+  border-color: var(--border-3);
+  color: var(--accent);
+  transform: scale(1.08);
+}
+
+/* When lang-dropdown is in solo mode (right: 16px, ~58px wide + 8px gap) */
+.theme-toggle--solo {
+  right: 82px;
+}

@@ -1,0 +1,2748 @@
+openapi: 3.0.3
+info:
+  title: leanschool API
+  description: CRUD data layer for school management (receipts, locations, persons,
+    classes, etc.).
+  version: 0.1.0
+servers:
+- url: http://localhost:8080
+  description: local
+paths:
+  /addresses:
+    get:
+      summary: List addresses
+      operationId: listAddresss
+      responses:
+        '200':
+          description: List of addresses
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Address'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    post:
+      summary: Create a addresse
+      operationId: createAddress
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddressRequest'
+      responses:
+        '201':
+          description: Created Address
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /addresses/{id}:
+    get:
+      summary: Get a Address by ID
+      operationId: getAddress
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Address ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Address
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+        '404':
+          description: Not found
+    put:
+      summary: Update a Address
+      operationId: updateAddress
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Address ID
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddressRequest'
+      responses:
+        '200':
+          description: Updated Address
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '409':
+          description: Conflict — optimistic lock
+    delete:
+      summary: Delete a Address
+      operationId: deleteAddress
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Address ID
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Deleted
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /buildings:
+    get:
+      summary: List buildings
+      operationId: listBuildings
+      responses:
+        '200':
+          description: List of buildings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Building'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    post:
+      summary: Create a building
+      operationId: createBuilding
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BuildingRequest'
+      responses:
+        '201':
+          description: Created Building
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Building'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /buildings/{id}:
+    get:
+      summary: Get a Building by ID
+      operationId: getBuilding
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Building ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Building
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Building'
+        '404':
+          description: Not found
+    put:
+      summary: Update a Building
+      operationId: updateBuilding
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Building ID
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BuildingRequest'
+      responses:
+        '200':
+          description: Updated Building
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Building'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '409':
+          description: Conflict — optimistic lock
+    delete:
+      summary: Delete a Building
+      operationId: deleteBuilding
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Building ID
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Deleted
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /cities:
+    get:
+      summary: List cities
+      operationId: listCitys
+      responses:
+        '200':
+          description: List of cities
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/City'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    post:
+      summary: Create a citie
+      operationId: createCity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CityRequest'
+      responses:
+        '201':
+          description: Created City
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/City'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /cities/{id}:
+    get:
+      summary: Get a City by ID
+      operationId: getCity
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: City ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: City
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/City'
+        '404':
+          description: Not found
+    put:
+      summary: Update a City
+      operationId: updateCity
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: City ID
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CityRequest'
+      responses:
+        '200':
+          description: Updated City
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/City'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '409':
+          description: Conflict — optimistic lock
+    delete:
+      summary: Delete a City
+      operationId: deleteCity
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: City ID
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Deleted
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /curricula:
+    get:
+      summary: List curricula
+      operationId: listCurriculums
+      responses:
+        '200':
+          description: List of curricula
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Curriculum'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    post:
+      summary: Create a curricul
+      operationId: createCurriculum
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Curriculum'
+      responses:
+        '201':
+          description: Created Curriculum
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Curriculum'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /curricula/{id}:
+    get:
+      summary: Get a Curriculum by ID
+      operationId: getCurriculum
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Curriculum ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Curriculum
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Curriculum'
+        '404':
+          description: Not found
+    put:
+      summary: Update a Curriculum
+      operationId: updateCurriculum
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Curriculum ID
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Curriculum'
+      responses:
+        '200':
+          description: Updated Curriculum
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Curriculum'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '409':
+          description: Conflict — optimistic lock
+    delete:
+      summary: Delete a Curriculum
+      operationId: deleteCurriculum
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Curriculum ID
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Deleted
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /exams:
+    get:
+      summary: List exams
+      operationId: listExams
+      responses:
+        '200':
+          description: List of exams
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Exam'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    post:
+      summary: Create a exam
+      operationId: createExam
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExamRequest'
+      responses:
+        '201':
+          description: Created Exam
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exam'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /exams/{id}:
+    get:
+      summary: Get a Exam by ID
+      operationId: getExam
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Exam ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Exam
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exam'
+        '404':
+          description: Not found
+    put:
+      summary: Update a Exam
+      operationId: updateExam
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Exam ID
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExamRequest'
+      responses:
+        '200':
+          description: Updated Exam
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exam'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '409':
+          description: Conflict — optimistic lock
+    delete:
+      summary: Delete a Exam
+      operationId: deleteExam
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Exam ID
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Deleted
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /grades:
+    get:
+      summary: List grades
+      operationId: listGrades
+      responses:
+        '200':
+          description: List of grades
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Grade'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    post:
+      summary: Create a grade
+      operationId: createGrade
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GradeRequest'
+      responses:
+        '201':
+          description: Created Grade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Grade'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /grades/{id}:
+    get:
+      summary: Get a Grade by ID
+      operationId: getGrade
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Grade ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Grade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Grade'
+        '404':
+          description: Not found
+    put:
+      summary: Update a Grade
+      operationId: updateGrade
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Grade ID
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GradeRequest'
+      responses:
+        '200':
+          description: Updated Grade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Grade'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '409':
+          description: Conflict — optimistic lock
+    delete:
+      summary: Delete a Grade
+      operationId: deleteGrade
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Grade ID
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Deleted
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /guardians:
+    get:
+      summary: List guardians
+      operationId: listGuardians
+      responses:
+        '200':
+          description: List of guardians
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Guardian'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    post:
+      summary: Create a guardian
+      operationId: createGuardian
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GuardianRequest'
+      responses:
+        '201':
+          description: Created Guardian
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Guardian'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /guardians/{id}:
+    get:
+      summary: Get a Guardian by ID
+      operationId: getGuardian
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Guardian ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Guardian
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Guardian'
+        '404':
+          description: Not found
+    put:
+      summary: Update a Guardian
+      operationId: updateGuardian
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Guardian ID
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GuardianRequest'
+      responses:
+        '200':
+          description: Updated Guardian
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Guardian'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '409':
+          description: Conflict — optimistic lock
+    delete:
+      summary: Delete a Guardian
+      operationId: deleteGuardian
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Guardian ID
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Deleted
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /lessons:
+    get:
+      summary: List lessons
+      operationId: listLessons
+      responses:
+        '200':
+          description: List of lessons
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Lesson'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    post:
+      summary: Create a lesson
+      operationId: createLesson
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LessonRequest'
+      responses:
+        '201':
+          description: Created Lesson
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lesson'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /lessons/{id}:
+    get:
+      summary: Get a Lesson by ID
+      operationId: getLesson
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Lesson ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Lesson
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lesson'
+        '404':
+          description: Not found
+    put:
+      summary: Update a Lesson
+      operationId: updateLesson
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Lesson ID
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LessonRequest'
+      responses:
+        '200':
+          description: Updated Lesson
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lesson'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '409':
+          description: Conflict — optimistic lock
+    delete:
+      summary: Delete a Lesson
+      operationId: deleteLesson
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Lesson ID
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Deleted
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /locations:
+    get:
+      summary: List locations
+      operationId: listLocations
+      responses:
+        '200':
+          description: List of locations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Location'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    post:
+      summary: Create a location
+      operationId: createLocation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Location'
+      responses:
+        '201':
+          description: Created Location
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /locations/{id}:
+    get:
+      summary: Get a Location by ID
+      operationId: getLocation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Location ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Location
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+        '404':
+          description: Not found
+    put:
+      summary: Update a Location
+      operationId: updateLocation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Location ID
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Location'
+      responses:
+        '200':
+          description: Updated Location
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '409':
+          description: Conflict — optimistic lock
+    delete:
+      summary: Delete a Location
+      operationId: deleteLocation
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Location ID
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Deleted
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /persons:
+    get:
+      summary: List persons
+      operationId: listPersons
+      responses:
+        '200':
+          description: List of persons
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Person'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    post:
+      summary: Create a person
+      operationId: createPerson
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonRequest'
+      responses:
+        '201':
+          description: Created Person
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /persons/{id}:
+    get:
+      summary: Get a Person by ID
+      operationId: getPerson
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Person ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Person
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+        '404':
+          description: Not found
+    put:
+      summary: Update a Person
+      operationId: updatePerson
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Person ID
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonRequest'
+      responses:
+        '200':
+          description: Updated Person
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '409':
+          description: Conflict — optimistic lock
+    delete:
+      summary: Delete a Person
+      operationId: deletePerson
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Person ID
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Deleted
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /postal-codes:
+    get:
+      summary: List postal codes
+      operationId: listPostalCodes
+      responses:
+        '200':
+          description: List of postal codes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PostalCode'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    post:
+      summary: Create a postal code
+      operationId: createPostalCode
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostalCode'
+      responses:
+        '201':
+          description: Created PostalCode
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostalCode'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /postal-codes/{id}:
+    get:
+      summary: Get a PostalCode by ID
+      operationId: getPostalCode
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: PostalCode ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: PostalCode
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostalCode'
+        '404':
+          description: Not found
+    put:
+      summary: Update a PostalCode
+      operationId: updatePostalCode
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: PostalCode ID
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostalCode'
+      responses:
+        '200':
+          description: Updated PostalCode
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostalCode'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '409':
+          description: Conflict — optimistic lock
+    delete:
+      summary: Delete a PostalCode
+      operationId: deletePostalCode
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: PostalCode ID
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Deleted
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /receipts:
+    get:
+      summary: List receipts
+      operationId: listReceipts
+      parameters:
+      - name: owner
+        in: query
+        required: false
+        description: Filter by receiptOwnerId
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of receipts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Receipt'
+    post:
+      summary: Create a receipt
+      operationId: createReceipt
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Receipt'
+      responses:
+        '201':
+          description: Created receipt
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Receipt'
+        '400':
+          description: Bad request
+  /receipts/{id}:
+    get:
+      summary: Get a receipt by ID
+      operationId: getReceipt
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Receipt ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Receipt
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Receipt'
+        '404':
+          description: Not found
+    put:
+      summary: Update a receipt
+      operationId: updateReceipt
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Receipt ID
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Receipt'
+      responses:
+        '200':
+          description: Updated receipt
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Receipt'
+        '404':
+          description: Not found
+    delete:
+      summary: Delete a receipt
+      operationId: deleteReceipt
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Receipt ID
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Deleted
+        '404':
+          description: Not found
+  /rooms:
+    get:
+      summary: List rooms
+      operationId: listRooms
+      responses:
+        '200':
+          description: List of rooms
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Room'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    post:
+      summary: Create a room
+      operationId: createRoom
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoomRequest'
+      responses:
+        '201':
+          description: Created Room
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Room'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /rooms/{id}:
+    get:
+      summary: Get a Room by ID
+      operationId: getRoom
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Room ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Room
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Room'
+        '404':
+          description: Not found
+    put:
+      summary: Update a Room
+      operationId: updateRoom
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Room ID
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoomRequest'
+      responses:
+        '200':
+          description: Updated Room
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Room'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '409':
+          description: Conflict — optimistic lock
+    delete:
+      summary: Delete a Room
+      operationId: deleteRoom
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Room ID
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Deleted
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /school-classes:
+    get:
+      summary: List school classes
+      operationId: listSchoolClasss
+      responses:
+        '200':
+          description: List of school classes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SchoolClass'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    post:
+      summary: Create a school classe
+      operationId: createSchoolClass
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SchoolClassRequest'
+      responses:
+        '201':
+          description: Created SchoolClass
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchoolClass'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /school-classes/{id}:
+    get:
+      summary: Get a SchoolClass by ID
+      operationId: getSchoolClass
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: SchoolClass ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: SchoolClass
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchoolClass'
+        '404':
+          description: Not found
+    put:
+      summary: Update a SchoolClass
+      operationId: updateSchoolClass
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: SchoolClass ID
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SchoolClassRequest'
+      responses:
+        '200':
+          description: Updated SchoolClass
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchoolClass'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '409':
+          description: Conflict — optimistic lock
+    delete:
+      summary: Delete a SchoolClass
+      operationId: deleteSchoolClass
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: SchoolClass ID
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Deleted
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /school-years:
+    get:
+      summary: List school years
+      operationId: listSchoolYears
+      responses:
+        '200':
+          description: List of school years
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SchoolYear'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    post:
+      summary: Create a school year
+      operationId: createSchoolYear
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SchoolYear'
+      responses:
+        '201':
+          description: Created SchoolYear
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchoolYear'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /school-years/{id}:
+    get:
+      summary: Get a SchoolYear by ID
+      operationId: getSchoolYear
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: SchoolYear ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: SchoolYear
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchoolYear'
+        '404':
+          description: Not found
+    put:
+      summary: Update a SchoolYear
+      operationId: updateSchoolYear
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: SchoolYear ID
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SchoolYear'
+      responses:
+        '200':
+          description: Updated SchoolYear
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchoolYear'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '409':
+          description: Conflict — optimistic lock
+    delete:
+      summary: Delete a SchoolYear
+      operationId: deleteSchoolYear
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: SchoolYear ID
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Deleted
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /students:
+    get:
+      summary: List students
+      operationId: listStudents
+      responses:
+        '200':
+          description: List of students
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Student'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    post:
+      summary: Create a student
+      operationId: createStudent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentRequest'
+      responses:
+        '201':
+          description: Created Student
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /students/{id}:
+    get:
+      summary: Get a Student by ID
+      operationId: getStudent
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Student ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Student
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+        '404':
+          description: Not found
+    put:
+      summary: Update a Student
+      operationId: updateStudent
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Student ID
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentRequest'
+      responses:
+        '200':
+          description: Updated Student
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '409':
+          description: Conflict — optimistic lock
+    delete:
+      summary: Delete a Student
+      operationId: deleteStudent
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Student ID
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Deleted
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /subjects:
+    get:
+      summary: List subjects
+      operationId: listSubjects
+      responses:
+        '200':
+          description: List of subjects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Subject'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    post:
+      summary: Create a subject
+      operationId: createSubject
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubjectRequest'
+      responses:
+        '201':
+          description: Created Subject
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subject'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /subjects/{id}:
+    get:
+      summary: Get a Subject by ID
+      operationId: getSubject
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Subject ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Subject
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subject'
+        '404':
+          description: Not found
+    put:
+      summary: Update a Subject
+      operationId: updateSubject
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Subject ID
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubjectRequest'
+      responses:
+        '200':
+          description: Updated Subject
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subject'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '409':
+          description: Conflict — optimistic lock
+    delete:
+      summary: Delete a Subject
+      operationId: deleteSubject
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Subject ID
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Deleted
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /teachers:
+    get:
+      summary: List teachers
+      operationId: listTeachers
+      responses:
+        '200':
+          description: List of teachers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Teacher'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    post:
+      summary: Create a teacher
+      operationId: createTeacher
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeacherRequest'
+      responses:
+        '201':
+          description: Created Teacher
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Teacher'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /teachers/{id}:
+    get:
+      summary: Get a Teacher by ID
+      operationId: getTeacher
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Teacher ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Teacher
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Teacher'
+        '404':
+          description: Not found
+    put:
+      summary: Update a Teacher
+      operationId: updateTeacher
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Teacher ID
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeacherRequest'
+      responses:
+        '200':
+          description: Updated Teacher
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Teacher'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '409':
+          description: Conflict — optimistic lock
+    delete:
+      summary: Delete a Teacher
+      operationId: deleteTeacher
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Teacher ID
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Deleted
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+components:
+  schemas:
+    Address:
+      type: object
+      properties:
+        id:
+          type: string
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        number:
+          type: string
+          example: 1a
+        postalCode:
+          $ref: '#/components/schemas/PostalCode'
+        street:
+          type: string
+          example: Bahnhofstrasse
+        version:
+          type: integer
+          example: 0
+      required:
+      - id
+      - version
+    AddressRequest:
+      type: object
+      properties:
+        number:
+          type: string
+          example: 1a
+        postalCode:
+          $ref: '#/components/schemas/PostalCodeRef'
+        street:
+          type: string
+          example: Bahnhofstrasse
+        version:
+          type: integer
+          example: 0
+      required:
+      - version
+    Building:
+      type: object
+      properties:
+        id:
+          type: string
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        location:
+          $ref: '#/components/schemas/Location'
+        name:
+          type: string
+          example: Main Building
+        version:
+          type: integer
+          example: 0
+      required:
+      - id
+      - name
+      - version
+    BuildingRequest:
+      type: object
+      properties:
+        location:
+          $ref: '#/components/schemas/EntityRef'
+        name:
+          type: string
+          example: Main Building
+        version:
+          type: integer
+          example: 0
+      required:
+      - name
+      - version
+    City:
+      type: object
+      properties:
+        id:
+          type: string
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        name:
+          type: string
+          example: Zurich
+        postalCodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/PostalCode'
+        version:
+          type: integer
+          example: 0
+      required:
+      - id
+      - name
+      - postalCodes
+      - version
+    CityRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Zurich
+        postalCodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/PostalCodeRef'
+        version:
+          type: integer
+          example: 0
+      required:
+      - name
+      - postalCodes
+      - version
+    Curriculum:
+      type: object
+      properties:
+        activeFrom:
+          type: string
+          format: date-time
+        activeSince:
+          type: string
+          format: date-time
+        activeUntil:
+          type: string
+          format: date-time
+        id:
+          type: string
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        name:
+          type: string
+          example: National Curriculum 2024
+        version:
+          type: integer
+          example: 0
+      required:
+      - id
+      - version
+      - name
+    EntityRef:
+      type: object
+      properties:
+        id:
+          type: string
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+      required:
+      - id
+    Exam:
+      type: object
+      properties:
+        id:
+          type: string
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        schoolClass:
+          $ref: '#/components/schemas/SchoolClass'
+        version:
+          type: integer
+          example: 0
+      required:
+      - id
+      - version
+    ExamRequest:
+      type: object
+      properties:
+        schoolClass:
+          $ref: '#/components/schemas/EntityRef'
+        version:
+          type: integer
+          example: 0
+      required:
+      - version
+    Grade:
+      type: object
+      properties:
+        exam:
+          $ref: '#/components/schemas/Exam'
+        grade:
+          type: number
+          format: double
+          example: 5.5
+        id:
+          type: string
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        student:
+          $ref: '#/components/schemas/Student'
+        version:
+          type: integer
+          example: 0
+      required:
+      - id
+      - version
+    GradeRequest:
+      type: object
+      properties:
+        exam:
+          $ref: '#/components/schemas/EntityRef'
+        grade:
+          type: number
+          format: double
+          example: 5.5
+        student:
+          $ref: '#/components/schemas/EntityRef'
+        version:
+          type: integer
+          example: 0
+      required:
+      - version
+    Guardian:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/Address'
+        dateOfBirth:
+          type: string
+          format: date-time
+        id:
+          type: string
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        name:
+          type: string
+          example: Smith
+        prename:
+          type: string
+          example: John
+        sub:
+          type: string
+          example: keycloak-subject-uuid
+        version:
+          type: integer
+          example: 0
+      required:
+      - id
+      - name
+      - prename
+      - version
+    GuardianRequest:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/EntityRef'
+        dateOfBirth:
+          type: string
+          format: date-time
+        name:
+          type: string
+          example: Smith
+        prename:
+          type: string
+          example: John
+        sub:
+          type: string
+          example: keycloak-subject-uuid
+        version:
+          type: integer
+          example: 0
+      required:
+      - name
+      - prename
+      - version
+    Lesson:
+      type: object
+      properties:
+        id:
+          type: string
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        schoolClass:
+          $ref: '#/components/schemas/SchoolClass'
+        subject:
+          $ref: '#/components/schemas/Subject'
+        teacher:
+          $ref: '#/components/schemas/Teacher'
+        version:
+          type: integer
+          example: 0
+        room:
+          $ref: '#/components/schemas/Room'
+        dayOfWeek:
+          type: integer
+          example: 1
+          description: 1=Monday, 5=Friday
+        period:
+          type: integer
+          example: 1
+        startTime:
+          type: string
+          example: 08:00
+        endTime:
+          type: string
+          example: 08:45
+      required:
+      - id
+      - version
+    LessonRequest:
+      type: object
+      properties:
+        schoolClass:
+          $ref: '#/components/schemas/EntityRef'
+        subject:
+          $ref: '#/components/schemas/EntityRef'
+        teacher:
+          $ref: '#/components/schemas/EntityRef'
+        version:
+          type: integer
+          example: 0
+        room:
+          $ref: '#/components/schemas/EntityRef'
+        dayOfWeek:
+          type: integer
+        period:
+          type: integer
+        startTime:
+          type: string
+        endTime:
+          type: string
+      required:
+      - version
+    Location:
+      type: object
+      properties:
+        id:
+          type: string
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        lat:
+          type: number
+          format: double
+          example: 47.3769
+        lon:
+          type: number
+          format: double
+          example: 8.5417
+        version:
+          type: integer
+          example: 0
+      required:
+      - id
+      - version
+    Person:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/Address'
+        dateOfBirth:
+          type: string
+          format: date-time
+        id:
+          type: string
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        name:
+          type: string
+          example: Smith
+        prename:
+          type: string
+          example: John
+        sub:
+          type: string
+          example: keycloak-subject-uuid
+        version:
+          type: integer
+          example: 0
+      required:
+      - id
+      - name
+      - prename
+      - version
+    PersonRequest:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/EntityRef'
+        dateOfBirth:
+          type: string
+          format: date-time
+        name:
+          type: string
+          example: Smith
+        prename:
+          type: string
+          example: John
+        sub:
+          type: string
+          example: keycloak-subject-uuid
+        version:
+          type: integer
+          example: 0
+      required:
+      - name
+      - prename
+      - version
+    PostalCode:
+      type: object
+      properties:
+        city:
+          type: string
+          example: Zurich
+        id:
+          type: string
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        number:
+          type: integer
+          example: 8001
+        version:
+          type: integer
+          example: 0
+      required:
+      - id
+      - city
+      - version
+      - number
+    PostalCodeRef:
+      type: object
+      properties:
+        id:
+          type: string
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+      required:
+      - id
+    Receipt:
+      type: object
+      properties:
+        id:
+          type: string
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReceiptItem'
+        receiptOwnerId:
+          type: string
+          example: user-42
+        taxes:
+          type: number
+          format: double
+          example: 1.04
+        time:
+          type: string
+          format: date-time
+        totalPrice:
+          type: number
+          format: double
+          example: 12.99
+        fileId:
+          type: string
+          example: file-uuid
+        accountId:
+          type: string
+          example: account-uuid
+        status:
+          $ref: '#/components/schemas/ReceiptStatus'
+        splits:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReceiptSplit'
+      required:
+      - id
+      - receiptOwnerId
+      - totalPrice
+      - taxes
+      - time
+      - items
+      - fileId
+      - accountId
+      - status
+      - splits
+    ReceiptItem:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: double
+          example: 2
+        name:
+          type: string
+          example: Milk
+        price:
+          type: number
+          format: double
+          example: 1.49
+      required:
+      - name
+      - amount
+      - price
+    Room:
+      type: object
+      properties:
+        building:
+          $ref: '#/components/schemas/Building'
+        id:
+          type: string
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        name:
+          type: string
+          example: Room 101
+        version:
+          type: integer
+          example: 0
+        roomType:
+          $ref: '#/components/schemas/RoomType'
+      required:
+      - id
+      - name
+      - version
+    RoomRequest:
+      type: object
+      properties:
+        building:
+          $ref: '#/components/schemas/EntityRef'
+        name:
+          type: string
+          example: Room 101
+        version:
+          type: integer
+          example: 0
+      required:
+      - name
+      - building
+      - version
+    SchoolClass:
+      type: object
+      properties:
+        classroom:
+          $ref: '#/components/schemas/Room'
+        id:
+          type: string
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        name:
+          type: string
+          example: Class 5A
+        schoolYear:
+          $ref: '#/components/schemas/SchoolYear'
+        shortcut:
+          type: string
+          example: 5A
+        students:
+          type: array
+          items:
+            $ref: '#/components/schemas/Student'
+        teachers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Teacher'
+        version:
+          type: integer
+          example: 0
+      required:
+      - id
+      - version
+      - name
+      - shortcut
+      - teachers
+      - students
+    SchoolClassRequest:
+      type: object
+      properties:
+        classroom:
+          $ref: '#/components/schemas/EntityRef'
+        name:
+          type: string
+          example: Class 5A
+        schoolYear:
+          $ref: '#/components/schemas/EntityRef'
+        shortcut:
+          type: string
+          example: 5A
+        students:
+          type: array
+          items:
+            $ref: '#/components/schemas/EntityRef'
+        teachers:
+          type: array
+          items:
+            $ref: '#/components/schemas/EntityRef'
+        version:
+          type: integer
+          example: 0
+      required:
+      - version
+    SchoolYear:
+      type: object
+      properties:
+        from:
+          type: string
+          format: date-time
+        id:
+          type: string
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        to:
+          type: string
+          format: date-time
+        version:
+          type: integer
+          example: 0
+      required:
+      - id
+      - version
+    Student:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/Address'
+        currentSchoolClass:
+          $ref: '#/components/schemas/SchoolClass'
+        dateOfBirth:
+          type: string
+          format: date-time
+        grades:
+          type: array
+          items:
+            $ref: '#/components/schemas/Grade'
+        guardians:
+          type: array
+          items:
+            $ref: '#/components/schemas/Guardian'
+        id:
+          type: string
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        name:
+          type: string
+          example: Doe
+        pastSchoolClasses:
+          type: array
+          items:
+            $ref: '#/components/schemas/SchoolClass'
+        prename:
+          type: string
+          example: Jane
+        sub:
+          type: string
+          example: keycloak-subject-uuid
+        version:
+          type: integer
+          example: 0
+      required:
+      - id
+      - name
+      - prename
+      - guardians
+      - version
+      - grades
+      - pastSchoolClasses
+    StudentRequest:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/EntityRef'
+        currentSchoolClass:
+          $ref: '#/components/schemas/EntityRef'
+        dateOfBirth:
+          type: string
+          format: date-time
+        guardians:
+          type: array
+          items:
+            $ref: '#/components/schemas/EntityRef'
+        name:
+          type: string
+          example: Doe
+        pastSchoolClasses:
+          type: array
+          items:
+            $ref: '#/components/schemas/EntityRef'
+        prename:
+          type: string
+          example: Jane
+        sub:
+          type: string
+          example: keycloak-subject-uuid
+        version:
+          type: integer
+          example: 0
+      required:
+      - name
+      - prename
+      - guardians
+      - version
+    Subject:
+      type: object
+      properties:
+        id:
+          type: string
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        name:
+          type: string
+          example: Mathematics
+        teachers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Teacher'
+        version:
+          type: integer
+          example: 0
+      required:
+      - id
+      - version
+      - name
+      - teachers
+    SubjectRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Mathematics
+        teachers:
+          type: array
+          items:
+            $ref: '#/components/schemas/EntityRef'
+        version:
+          type: integer
+          example: 0
+      required:
+      - version
+    Teacher:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/Address'
+        atSchoolSince:
+          type: string
+          format: date-time
+        atSchoolUntil:
+          type: string
+          format: date-time
+        dateOfBirth:
+          type: string
+          format: date-time
+        iban:
+          type: string
+          example: CH93-0076-2011-6238-5295-7
+        id:
+          type: string
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        name:
+          type: string
+          example: Smith
+        prename:
+          type: string
+          example: John
+        sub:
+          type: string
+          example: keycloak-subject-uuid
+        version:
+          type: integer
+          example: 0
+      required:
+      - id
+      - name
+      - prename
+      - atSchoolSince
+      - version
+    TeacherRequest:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/EntityRef'
+        atSchoolSince:
+          type: string
+          format: date-time
+        atSchoolUntil:
+          type: string
+          format: date-time
+        dateOfBirth:
+          type: string
+          format: date-time
+        iban:
+          type: string
+          example: CH93-0076-2011-6238-5295-7
+        name:
+          type: string
+          example: Smith
+        prename:
+          type: string
+          example: John
+        sub:
+          type: string
+          example: keycloak-subject-uuid
+        version:
+          type: integer
+          example: 0
+      required:
+      - name
+      - prename
+      - atSchoolSince
+      - version
+    RoomType:
+      type: string
+      enum:
+      - ClassRoom
+      - Kindergarden
+      - Music
+      - Video
+      - Library
+      - TeacherRoom
+      - ComputerRoom
+      - FacilityManagementRoom
+      - Theater
+      - MeetingRoom
+      - ScienceRoom
+      - SchoolManagementRoom
+      - SchoolSecretariatRoom
+    ReceiptStatus:
+      type: string
+      enum:
+      - unsubmitted
+      - submitted
+      - accepted
+      - declined
+    ReceiptSplit:
+      type: object
+      properties:
+        classId:
+          type: string
+        accountId:
+          type: string
+        amount:
+          type: number
+          format: double
+      required:
+      - classId
+      - accountId
+      - amount
+  securitySchemes:
+    keycloak:
+      type: openIdConnect
+      description: Keycloak OpenID Connect — JWT bearer token with realm_access roles
+        (leanschool_read, leanschool_write)
+      openIdConnectUrl: http://localhost:8180/realms/leanschool/.well-known/openid-configuration
+security:
+- keycloak: []

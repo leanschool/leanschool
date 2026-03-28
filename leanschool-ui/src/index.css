@@ -1,0 +1,303 @@
+/* ── Raw palette tokens ────────────────────────────────────────────────────── */
+:root {
+  /* Green (brand) */
+  --green-50:  #f4f8f5;
+  --green-100: #e8f0ea;
+  --green-200: #c5d9cb;
+  --green-300: #96b8a2;
+  --green-400: #6a9478;
+  --green-500: #4a7459;
+  --green-600: #3a5c46;
+  --green-700: #2d4a38;
+  --green-800: #22382a;
+  --green-900: #1a2e1f;
+
+  /* Amber (accent) */
+  --amber-50:  #fef8f0;
+  --amber-100: #fdf0e0;
+  --amber-200: #f5d5b0;
+  --amber-300: #f0b07a;
+  --amber-400: #e8954f;
+  --amber-500: #d97c35;
+  --amber-600: #c96820;
+  --amber-700: #b85c1a;
+
+  /* Stone (neutrals) */
+  --stone-50:  #fafaf9;
+  --stone-100: #f5f4f2;
+  --stone-200: #e7e5e4;
+  --stone-300: #d6d3d1;
+  --stone-400: #a8a29e;
+  --stone-500: #78716c;
+  --stone-600: #57534e;
+  --stone-700: #44403c;
+  --stone-800: #292524;
+  --stone-900: #1c1917;
+}
+
+/* ── Light theme ───────────────────────────────────────────────────────────── */
+:root {
+  /* Backgrounds */
+  --bg-page:   #fafaf9;            /* stone-50 */
+  --bg-card:   #ffffff;
+  --bg-input:  #f5f4f2;            /* stone-100 */
+  --bg-hover:  rgba(58, 92, 70, 0.04);
+
+  /* Text */
+  --text-1:    #1c1917;            /* stone-900 */
+  --text-2:    #44403c;            /* stone-700 */
+  --text-3:    #78716c;            /* stone-500 */
+
+  /* Primary (green) */
+  --accent:    #3a5c46;            /* green-600 */
+  --accent-dk: #22382a;            /* green-800 */
+  --accent-lt: #6a9478;            /* green-400 */
+  --accent-mt: #96b8a2;            /* green-300 */
+
+  /* Borders */
+  --border-1:  #e7e5e4;            /* stone-200 */
+  --border-2:  #d6d3d1;            /* stone-300 */
+  --border-3:  #a8a29e;            /* stone-400 */
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(28, 25, 23, 0.08);
+  --shadow-md: 0 2px 8px rgba(28, 25, 23, 0.08), 0 4px 16px rgba(28, 25, 23, 0.06);
+
+  /* Status */
+  --ok:    #059669;
+  --error: #dc2626;
+  --warn:  #d97706;
+  --ok-bg:   rgba(5, 150, 105, 0.08);
+  --err-bg:  rgba(220, 38, 38, 0.08);
+  --warn-bg: rgba(217, 119, 6, 0.08);
+
+  /* Accent with alpha */
+  --accent-a8: rgba(58, 92, 70, 0.08);
+  --accent-a4: rgba(58, 92, 70, 0.04);
+
+  /* On-accent (text on saturated accent backgrounds) */
+  --on-accent: #fff;
+
+  /* Spacing scale */
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  32px;
+  --space-2xl: 48px;
+
+  /* Border-radius scale */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-full: 9999px;
+
+  /* Aliases */
+  --bg-1:            var(--bg-card);
+  --bg-2:            var(--bg-input);
+  --bg-secondary:    var(--bg-input);
+  --text-4:          var(--text-3);
+  --fg-primary:      var(--text-1);
+  --fg-muted:        var(--text-3);
+  --color-danger:    var(--error);
+  --bg-danger-subtle: var(--err-bg);
+  --border-disabled: var(--border-1);
+
+  /* Legacy scaffold variables (merged) */
+  --text:           #57534e;       /* stone-600 */
+  --text-h:         #1c1917;       /* stone-900 */
+  --bg:             #ffffff;
+  --border:         #e7e5e4;       /* stone-200 */
+  --code-bg:        #f5f4f2;       /* stone-100 */
+  --accent-bg:      rgba(58, 92, 70, 0.10);
+  --accent-border:  rgba(58, 92, 70, 0.50);
+  --social-bg:      rgba(245, 244, 242, 0.5);
+  --shadow:
+    rgba(28, 25, 23, 0.08) 0 10px 15px -3px,
+    rgba(28, 25, 23, 0.04) 0 4px 6px -2px;
+
+  --sans:    'Inter', system-ui, 'Segoe UI', sans-serif;
+  --heading: 'Inter', system-ui, 'Segoe UI', sans-serif;
+  --mono:    ui-monospace, Consolas, monospace;
+
+  color-scheme: light;
+}
+
+/* ── Dark theme ────────────────────────────────────────────────────────────── */
+[data-theme="dark"] {
+  --bg-page:   #111a14;
+  --bg-card:   #182118;
+  --bg-input:  #1e2a21;
+  --bg-hover:  rgba(74, 116, 89, 0.10);
+
+  --text-1:    #e8f0ea;            /* green-100 */
+  --text-2:    #96b8a2;            /* green-300 */
+  --text-3:    #6a9478;            /* green-400 */
+
+  --accent:    #6a9478;            /* green-400 — lighter for dark bg */
+  --accent-dk: #4a7459;            /* green-500 */
+  --accent-lt: #96b8a2;            /* green-300 */
+  --accent-mt: #c5d9cb;            /* green-200 */
+
+  --border-1:  rgba(255, 255, 255, 0.08);
+  --border-2:  rgba(150, 184, 162, 0.20);
+  --border-3:  rgba(150, 184, 162, 0.35);
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.30);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.40), 0 16px 48px rgba(0, 0, 0, 0.50);
+
+  --ok:    #34d399;
+  --error: #f87171;
+  --warn:  #fbbf24;
+  --ok-bg:   rgba(52, 211, 153, 0.10);
+  --err-bg:  rgba(248, 113, 113, 0.10);
+  --warn-bg: rgba(251, 191, 36, 0.10);
+
+  --accent-a8: rgba(106, 148, 120, 0.12);
+  --accent-a4: rgba(106, 148, 120, 0.06);
+  --on-accent: #fff;
+
+  /* Legacy scaffold variables (dark) */
+  --text:           #96b8a2;       /* green-300 */
+  --text-h:         #e8f0ea;       /* green-100 */
+  --bg:             #182118;
+  --border:         rgba(255, 255, 255, 0.08);
+  --code-bg:        #1e2a21;
+  --accent-bg:      rgba(106, 148, 120, 0.15);
+  --accent-border:  rgba(106, 148, 120, 0.50);
+  --social-bg:      rgba(30, 42, 33, 0.5);
+  --shadow:
+    rgba(0, 0, 0, 0.40) 0 10px 15px -3px,
+    rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+
+  color-scheme: dark;
+}
+
+/* ── System-preference dark (fallback when no explicit theme set) ───────────── */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg-page:   #111a14;
+    --bg-card:   #182118;
+    --bg-input:  #1e2a21;
+    --bg-hover:  rgba(74, 116, 89, 0.10);
+
+    --text-1:    #e8f0ea;
+    --text-2:    #96b8a2;
+    --text-3:    #6a9478;
+
+    --accent:    #6a9478;
+    --accent-dk: #4a7459;
+    --accent-lt: #96b8a2;
+    --accent-mt: #c5d9cb;
+
+    --border-1:  rgba(255, 255, 255, 0.08);
+    --border-2:  rgba(150, 184, 162, 0.20);
+    --border-3:  rgba(150, 184, 162, 0.35);
+
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.30);
+    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.40), 0 16px 48px rgba(0, 0, 0, 0.50);
+
+    --ok:    #34d399;
+    --error: #f87171;
+    --warn:  #fbbf24;
+    --ok-bg:   rgba(52, 211, 153, 0.10);
+    --err-bg:  rgba(248, 113, 113, 0.10);
+    --warn-bg: rgba(251, 191, 36, 0.10);
+
+    --accent-a8: rgba(106, 148, 120, 0.12);
+    --accent-a4: rgba(106, 148, 120, 0.06);
+    --on-accent: #fff;
+
+    --text:           #96b8a2;
+    --text-h:         #e8f0ea;
+    --bg:             #182118;
+    --border:         rgba(255, 255, 255, 0.08);
+    --code-bg:        #1e2a21;
+    --accent-bg:      rgba(106, 148, 120, 0.15);
+    --accent-border:  rgba(106, 148, 120, 0.50);
+    --social-bg:      rgba(30, 42, 33, 0.5);
+    --shadow:
+      rgba(0, 0, 0, 0.40) 0 10px 15px -3px,
+      rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+
+    color-scheme: dark;
+  }
+
+  #social .button-icon {
+    filter: invert(1) brightness(2);
+  }
+}
+
+/* ── Base styles ───────────────────────────────────────────────────────────── */
+body {
+  margin: 0;
+}
+
+#root {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+:root {
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+h1,
+h2 {
+  font-family: var(--heading);
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+h1 {
+  font-size: 56px;
+  letter-spacing: -1.68px;
+  margin: 32px 0;
+  @media (max-width: 1024px) {
+    font-size: 36px;
+    margin: 20px 0;
+  }
+}
+h2 {
+  font-size: 24px;
+  line-height: 118%;
+  letter-spacing: -0.24px;
+  margin: 0 0 8px;
+  @media (max-width: 1024px) {
+    font-size: 20px;
+  }
+}
+p {
+  margin: 0;
+}
+
+code,
+.counter {
+  font-family: var(--mono);
+  display: inline-flex;
+  border-radius: 4px;
+  color: var(--text-h);
+}
+
+code {
+  font-size: 15px;
+  line-height: 135%;
+  padding: 4px 8px;
+  background: var(--code-bg);
+}

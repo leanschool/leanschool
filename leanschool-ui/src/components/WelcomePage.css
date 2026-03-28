@@ -1,0 +1,96 @@
+.welcome-page {
+  min-height: 100svh;
+  background: var(--bg-page);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.welcome-card {
+  position: relative;
+  z-index: 1;
+  background: var(--bg-card);
+  border: 1px solid var(--border-1);
+  border-radius: 20px;
+  padding: 2.5rem;
+  width: min(440px, 90vw);
+  box-shadow: var(--shadow-md);
+}
+
+.welcome-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-1);
+  margin: 0 0 0.5rem;
+}
+
+.welcome-subtitle {
+  color: var(--text-2);
+  font-size: 0.95rem;
+  margin: 0 0 2rem;
+}
+
+.welcome-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.welcome-field-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  color: var(--text-3);
+  font-size: 0.85rem;
+}
+
+.welcome-input {
+  background: var(--bg-input);
+  border: 1px solid var(--border-2);
+  border-radius: 8px;
+  color: var(--text-1);
+  font-size: 0.95rem;
+  padding: 0.6rem 0.85rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.welcome-input:focus {
+  border-color: var(--accent);
+}
+
+.welcome-error {
+  color: var(--error);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.welcome-skip {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.welcome-classes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.welcome-class-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-1);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.welcome-class-option input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}

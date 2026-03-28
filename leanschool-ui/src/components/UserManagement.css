@@ -1,0 +1,139 @@
+.um-page {
+  min-height: 100svh;
+  background: var(--bg-page);
+  position: relative;
+  overflow: hidden;
+  padding: 2rem 1rem;
+}
+
+.um-container {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.um-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  gap: 1rem;
+}
+
+.um-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-1);
+  margin: 0 0 0.25rem;
+}
+
+.um-subtitle {
+  color: var(--text-2);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.um-info {
+  color: var(--text-2);
+  font-size: 0.95rem;
+}
+
+.um-error {
+  color: var(--error);
+  font-size: 0.9rem;
+}
+
+.um-table-wrap {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid var(--border-1);
+  box-shadow: var(--shadow-md);
+}
+
+.um-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--text-1);
+  font-size: 0.9rem;
+}
+
+.um-table th {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  color: var(--text-2);
+  font-weight: 500;
+  border-bottom: 1px solid var(--border-1);
+  background: var(--bg-hover);
+}
+
+.um-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-1);
+  vertical-align: middle;
+  background: var(--bg-card);
+}
+
+.um-table tr:last-child td {
+  border-bottom: none;
+}
+
+.um-sub {
+  font-size: 0.78rem;
+  color: var(--text-2);
+  font-family: monospace;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.um-badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.um-badge-pending  { background: var(--warn-bg); color: var(--warn); }
+.um-badge-approved { background: var(--ok-bg); color: var(--ok); }
+.um-badge-denied   { background: var(--err-bg); color: var(--error); }
+
+.um-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.um-btn {
+  border: none;
+  border-radius: 6px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.um-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.um-btn-approve {
+  background: var(--ok-bg);
+  color: var(--ok);
+}
+
+.um-btn-approve:hover:not(:disabled) {
+  background: var(--ok-bg);
+}
+
+.um-btn-deny {
+  background: var(--err-bg);
+  color: var(--error);
+}
+
+.um-btn-deny:hover:not(:disabled) {
+  background: var(--err-bg);
+}

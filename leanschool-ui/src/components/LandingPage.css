@@ -1,0 +1,335 @@
+/* ── layout ─────────────────────────────────────────────────────────────── */
+.landing {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  background: var(--bg-page);
+  color: var(--text-1);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* ── animated background orbs ───────────────────────────────────────────── */
+.orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
+}
+.orb-1 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, var(--accent-a4), transparent 70%);
+  top: -200px; left: -100px;
+  animation: drift1 12s ease-in-out infinite;
+}
+.orb-2 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, var(--accent-a4), transparent 70%);
+  top: 200px; right: -150px;
+  animation: drift2 15s ease-in-out infinite;
+}
+.orb-3 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, var(--accent-a4), transparent 70%);
+  bottom: 0; left: 40%;
+  animation: drift3 18s ease-in-out infinite;
+}
+@keyframes drift1 {
+  0%,100% { transform: translate(0,0) scale(1); }
+  50%      { transform: translate(40px, 60px) scale(1.1); }
+}
+@keyframes drift2 {
+  0%,100% { transform: translate(0,0) scale(1); }
+  50%      { transform: translate(-50px, 30px) scale(0.9); }
+}
+@keyframes drift3 {
+  0%,100% { transform: translate(0,0) scale(1); }
+  50%      { transform: translate(30px, -40px) scale(1.05); }
+}
+
+/* ── nav ─────────────────────────────────────────────────────────────────── */
+.landing-nav {
+  position: relative; z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 48px;
+}
+.nav-logo {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-lt));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.nav-logo-img {
+  height: 44px;
+  width: auto;
+}
+.lang-switcher {
+  display: flex;
+  gap: 8px;
+}
+.lang-btn {
+  background: transparent;
+  border: 1px solid var(--border-1);
+  color: var(--text-3);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.lang-btn:hover { border-color: var(--border-2); color: var(--text-1); }
+.lang-btn.active {
+  background: var(--accent-a8);
+  border-color: var(--border-2);
+  color: var(--accent);
+}
+
+/* ── hero ────────────────────────────────────────────────────────────────── */
+.hero {
+  position: relative; z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 60px 24px 80px;
+  gap: 24px;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--border-2);
+  background: var(--accent-a4);
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+}
+.hero-title {
+  font-size: clamp(40px, 7vw, 80px);
+  font-weight: 800;
+  letter-spacing: -2px;
+  line-height: 1.08;
+  color: var(--text-1);
+  margin: 0;
+}
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-lt) 50%, var(--ok) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-subtitle {
+  max-width: 540px;
+  color: var(--text-2);
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* ── hero actions ────────────────────────────────────────────────────────── */
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  width: min(340px, 90vw);
+}
+
+/* ── CTA button ─────────────────────────────────────────────────────────── */
+/* Landing page overrides for .cta-button (base in domain-components.css) */
+.landing .cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 40px;
+  border-radius: 16px;
+  font-size: 18px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s;
+  letter-spacing: -0.2px;
+}
+.landing .cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  opacity: 1;
+}
+.landing .cta-button:active { transform: translateY(0); }
+.cta-icon { font-size: 20px; }
+
+/* ── role buttons ────────────────────────────────────────────────────────── */
+.role-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 32px;
+  border-radius: 20px;
+  border: 1px solid var(--border-1);
+  background: var(--bg-card);
+  color: var(--text-1);
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s;
+  letter-spacing: -0.2px;
+  min-width: 240px;
+  justify-content: space-between;
+  box-shadow: var(--shadow-md);
+}
+.role-button-icon {
+  font-size: 20px;
+  color: var(--accent-lt);
+}
+.role-button-label {
+  flex: 1;
+  text-align: left;
+}
+.role-button-arrow {
+  color: var(--text-3);
+  font-size: 16px;
+  transition: color 0.2s, transform 0.2s;
+}
+.role-button:hover {
+  border-color: var(--border-2);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+.role-button:hover .role-button-arrow {
+  color: var(--accent);
+  transform: translateX(4px);
+}
+.role-button--teacher:hover {
+  background: var(--bg-hover);
+}
+.role-button--management:hover {
+  background: var(--bg-hover);
+}
+.role-button--management .role-button-icon {
+  color: var(--accent-lt);
+}
+
+/* Landing page overrides for .ghost-button (base in domain-components.css) */
+.landing .ghost-button {
+  padding: 14px 28px;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* ── receipt mock card ──────────────────────────────────────────────────── */
+.receipt-mock {
+  margin-top: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-1);
+  border-radius: 20px;
+  padding: 24px;
+  width: min(340px, 90vw);
+  box-shadow: var(--shadow-md);
+  animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+.mock-header {
+  display: flex; gap: 6px; margin-bottom: 20px;
+}
+.mock-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--accent-a8);
+}
+.mock-line {
+  height: 10px; border-radius: 6px;
+  background: linear-gradient(90deg, var(--accent-a8), var(--accent-a4));
+}
+.mock-line--wide  { width: 80%; margin-bottom: 8px; }
+.mock-line--narrow { width: 40%; margin-bottom: 16px; }
+.mock-line--mid   { width: 55%; }
+.mock-line--short { width: 30%; }
+.mock-divider {
+  height: 1px; background: var(--accent-a8);
+  margin: 14px 0;
+}
+.mock-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.mock-price {
+  width: 48px; height: 10px;
+  border-radius: 6px;
+  background: var(--accent-a8);
+}
+.mock-total .mock-line--short { height: 12px; background: var(--accent-a8); }
+.mock-price--accent {
+  background: linear-gradient(90deg, var(--accent), var(--accent-dk));
+  opacity: 0.7;
+}
+
+/* ── features ───────────────────────────────────────────────────────────── */
+.features {
+  position: relative; z-index: 10;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  padding: 0 48px 80px;
+  max-width: 960px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+.feature-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-1);
+  border-radius: 20px;
+  padding: 32px 28px;
+  text-align: left;
+  transition: transform 0.25s, border-color 0.25s;
+  box-shadow: var(--shadow-md);
+}
+.feature-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-2);
+}
+.feature-icon {
+  font-size: 28px;
+  color: var(--accent-lt);
+  margin-bottom: 16px;
+}
+.feature-card h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-1);
+}
+.feature-card p {
+  color: var(--text-2);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ── footer ─────────────────────────────────────────────────────────────── */
+.landing-footer {
+  position: relative; z-index: 10;
+  text-align: center;
+  padding: 24px;
+  color: var(--text-3);
+  font-size: 13px;
+  border-top: 1px solid var(--border-1);
+}
+
+/* ── responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .landing-nav { padding: 16px 20px; }
+  .lang-btn { font-size: 11px; padding: 4px 8px; }
+  .features { padding: 0 20px 60px; }
+  .hero { padding: 40px 20px 60px; }
+}

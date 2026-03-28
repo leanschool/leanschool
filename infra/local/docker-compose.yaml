@@ -1,0 +1,164 @@
+services:
+
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: leanschool
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d leanschool"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ── Keycloak ──────────────────────────────────────────────────────────────────
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.1
+    # start-dev + --import-realm imports the JSON at startup if the realm doesn't exist yet
+    command: start-dev --import-realm
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+      # Force all issued tokens to use the public (browser-reachable) base URL so
+      # the `iss` claim matches what backend services expect.
+      KC_HOSTNAME_URL: http://localhost:8180
+      KC_HOSTNAME_ADMIN_URL: http://localhost:8180
+      KC_HEALTH_ENABLED: "true"
+    ports:
+      - "8180:8080"
+    volumes:
+      - ./keycloak-realm.json:/opt/keycloak/data/import/leanschool-realm.json:ro
+      - ./keycloak-theme/leanschool:/opt/keycloak/themes/leanschool:ro
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/9000 && printf \"GET /health/ready HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n\" >&3 && cat <&3 | grep -q UP'"]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+      start_period: 30s
+
+  # ── Backend services ──────────────────────────────────────────────────────────
+
+  leanschool:
+    build:
+      context: ../..
+      dockerfile: infra/dockerfiles/Dockerfile.leanschool
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      keycloak:
+        condition: service_healthy
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: admin
+      DB_PASSWORD: secret
+      DB_NAME: leanschool
+      KEYCLOAK_URL: http://keycloak:8080
+      KEYCLOAK_REALM: leanschool
+      KEYCLOAK_CLIENT_ID: leanschool-service
+      KEYCLOAK_CLIENT_SECRET: leanschool-secret
+      # Tokens are issued by Keycloak using the public URL; backends must match it.
+      KEYCLOAK_ISSUER: http://localhost:8180/realms/leanschool
+
+  file-service:
+    build:
+      context: ../..
+      dockerfile: infra/dockerfiles/Dockerfile.file-service
+    ports:
+      - "8083:8083"
+    depends_on:
+      keycloak:
+        condition: service_healthy
+    volumes:
+      - file_data:/data
+    environment:
+      KEYCLOAK_URL: http://keycloak:8080
+      KEYCLOAK_REALM: leanschool
+      KEYCLOAK_CLIENT_ID: file-service-client
+      KEYCLOAK_CLIENT_SECRET: file-service-secret
+      KEYCLOAK_ISSUER: http://localhost:8180/realms/leanschool
+
+  receipt-reader:
+    build:
+      context: ../..
+      dockerfile: infra/dockerfiles/Dockerfile.receipt-reader
+    ports:
+      - "8081:8080"
+    depends_on:
+      file-service:
+        condition: service_started
+      keycloak:
+        condition: service_healthy
+    environment:
+      TESSERACT_LANG: eng+deu+fra+ita
+      FILE_SERVICE_URL: http://file-service:8083
+      KEYCLOAK_URL: http://keycloak:8080
+      KEYCLOAK_REALM: leanschool
+      KEYCLOAK_CLIENT_ID: receipt-reader-client
+      KEYCLOAK_CLIENT_SECRET: receipt-reader-secret
+      KEYCLOAK_ISSUER: http://localhost:8180/realms/leanschool
+
+  extraction-service:
+    build:
+      context: ../..
+      dockerfile: infra/dockerfiles/Dockerfile.extraction-service
+    ports:
+      - "8084:8084"
+    depends_on:
+      keycloak:
+        condition: service_healthy
+    environment:
+      KEYCLOAK_URL: http://keycloak:8080
+      KEYCLOAK_REALM: leanschool
+      KEYCLOAK_CLIENT_ID: extraction-service-client
+      KEYCLOAK_CLIENT_SECRET: extraction-service-secret
+      KEYCLOAK_ISSUER: http://localhost:8180/realms/leanschool
+
+  timetable-service:
+    build:
+      context: ../..
+      dockerfile: infra/dockerfiles/Dockerfile.timetable-service
+    ports:
+      - "8085:8085"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      keycloak:
+        condition: service_healthy
+      leanschool:
+        condition: service_started
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: admin
+      DB_PASSWORD: secret
+      DB_NAME: timetable
+      KEYCLOAK_URL: http://keycloak:8080
+      KEYCLOAK_REALM: leanschool
+      KEYCLOAK_CLIENT_ID: timetable-service-client
+      KEYCLOAK_CLIENT_SECRET: timetable-service-secret
+      KEYCLOAK_ISSUER: http://localhost:8180/realms/leanschool
+      LEANSCHOOL_URL: http://leanschool:8080
+
+  ui:
+    build:
+      context: ../../leanschool-ui
+      dockerfile: ../infra/dockerfiles/Dockerfile.ui
+    ports:
+      - "3000:80"
+    depends_on:
+      - leanschool
+      - receipt-reader
+
+volumes:
+  postgres_data:
+  file_data:

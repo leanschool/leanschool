@@ -1,0 +1,307 @@
+.ard-page {
+  position: relative;
+  min-height: 100vh;
+  padding: 2rem;
+  background: var(--bg-page);
+  overflow: auto;
+}
+
+.ard-container {
+  background: var(--bg-card);
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  padding: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.ard-header {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ard-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-1);
+  margin-bottom: 0.5rem;
+}
+
+.ard-subtitle {
+  color: var(--text-2);
+  font-size: 1rem;
+}
+
+.ard-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.ard-search {
+  position: relative;
+  flex: 1;
+  min-width: 250px;
+}
+
+.ard-search-input {
+  width: 100%;
+  padding: 0.75rem 2.5rem 0.75rem 1rem;
+  border: 2px solid var(--border-1);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.ard-search-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.ard-search-icon {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1rem;
+  height: 1rem;
+  color: var(--text-3);
+}
+
+.ard-filter {
+  flex: 0 0 auto;
+}
+
+.ard-filter-select {
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--border-1);
+  border-radius: 8px;
+  font-size: 1rem;
+  background: var(--bg-card);
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.ard-filter-select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.ard-table-wrap {
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid var(--border-1);
+}
+
+.ard-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ard-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-2);
+  background: var(--bg-card);
+  border-bottom: 2px solid var(--border-1);
+}
+
+.ard-table td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-1);
+  vertical-align: middle;
+}
+
+.ard-row {
+  transition: background-color 0.2s ease;
+}
+
+.ard-row:hover {
+  background: var(--bg-card);
+}
+
+.ard-row-pending {
+  background: rgba(254, 240, 138, 0.1);
+}
+
+.ard-row-approved {
+  background: rgba(167, 243, 208, 0.1);
+}
+
+.ard-row-rejected {
+  background: rgba(254, 202, 202, 0.1);
+}
+
+.ard-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.ard-badge-pending {
+  background: var(--warn-bg);
+  color: var(--warn);
+}
+
+.ard-badge-approved {
+  background: var(--ok-bg);
+  color: var(--ok);
+}
+
+.ard-badge-rejected {
+  background: var(--err-bg);
+  color: var(--error);
+}
+
+.ard-actions {
+  white-space: nowrap;
+}
+
+.ard-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  margin-right: 0.5rem;
+}
+
+.ard-btn:last-child {
+  margin-right: 0;
+}
+
+.ard-btn-approve {
+  background: var(--ok);
+  color: var(--on-accent);
+}
+
+.ard-btn-approve:hover:not(:disabled) {
+  background: var(--ok);
+  filter: brightness(0.9);
+}
+
+.ard-btn-reject {
+  background: var(--error);
+  color: var(--on-accent);
+}
+
+.ard-btn-reject:hover:not(:disabled) {
+  background: var(--error);
+  filter: brightness(0.9);
+}
+
+.ard-btn-secondary {
+  background: var(--border-1);
+  color: var(--text-2);
+}
+
+.ard-btn-secondary:hover:not(:disabled) {
+  background: var(--border-1);
+  filter: brightness(0.9);
+}
+
+.ard-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ard-info {
+  color: var(--text-2);
+  text-align: center;
+  padding: 2rem;
+  font-size: 1rem;
+}
+
+.ard-error {
+  color: var(--error);
+  background: var(--err-bg);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.page-back-btn {
+  margin-top: 2rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--border-1);
+  color: var(--text-2);
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.page-back-btn:hover {
+  background: var(--border-1);
+  filter: brightness(0.9);
+}
+
+/* Orb decorations */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-a8), var(--accent-a4));
+  z-index: 1;
+}
+
+.orb-1 {
+  width: 400px;
+  height: 400px;
+  top: -100px;
+  right: -100px;
+}
+
+.orb-2 {
+  width: 250px;
+  height: 250px;
+  bottom: -50px;
+  left: -50px;
+}
+
+@media (max-width: 768px) {
+  .ard-container {
+    padding: 1.5rem;
+  }
+
+  .ard-controls {
+    flex-direction: column;
+  }
+
+  .ard-search, .ard-filter {
+    width: 100%;
+  }
+
+  .ard-table {
+    font-size: 0.9rem;
+  }
+
+  .ard-table th,
+  .ard-table td {
+    padding: 0.75rem;
+  }
+
+  .ard-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .ard-btn {
+    width: 100%;
+    margin-right: 0;
+  }
+}
