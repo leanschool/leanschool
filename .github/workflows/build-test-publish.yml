@@ -26,11 +26,17 @@ jobs:
     - name: Build leanschool
       run: cd leanschool && go build -o ../bin/leanschool ./cmd/...
 
+    - name: Build file-service
+      run: cd file-service && go build -o ../bin/file-service ./cmd/...
+
     - name: Build receipt-reader
       run: cd receipt-reader && go build -o ../bin/receipt-reader ./cmd/...
 
     - name: Test leanschool
       run: cd leanschool && go test ./...
+    
+    - name: Test file-service
+      run: cd file-service && go test ./...
 
     - name: Test receipt-reader
       run: cd receipt-reader && go test ./...
@@ -68,6 +74,17 @@ jobs:
         tags: |
           ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-leanschool:${{ env.IMAGE_VERSION }}
           ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-leanschool:latest
+        labels: ${{ steps.meta.outputs.labels }}
+    
+    - name: Build and push file-service image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./infra/dockerfiles/Dockerfile.file-service
+        push: true
+        tags: |
+          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-file-service:${{ env.IMAGE_VERSION }}
+          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-file-service:latest
         labels: ${{ steps.meta.outputs.labels }}
 
     - name: Build and push receipt-reader image
