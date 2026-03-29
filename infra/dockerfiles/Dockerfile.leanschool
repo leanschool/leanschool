@@ -22,9 +22,6 @@ RUN apk add --no-cache ca-certificates tzdata
 WORKDIR /app
 
 COPY --from=builder /leanschool .
-COPY testdata/receipts_template.xlsx ./receipts_template.xlsx
-
-ENV RECEIPT_TEMPLATE_PATH=/app/receipts_template.xlsx
 
 EXPOSE 8080
 
