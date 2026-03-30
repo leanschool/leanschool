@@ -17,10 +17,17 @@ func main() {
 	mux.HandleFunc("GET /files/{id}", h.Download)
 	mux.HandleFunc("DELETE /files/{id}", h.Delete)
 
+	outerMux := http.NewServeMux()
+	outerMux.HandleFunc("GET /health", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.Write([]byte(`{"status":"ok"}`))
+	})
+	auth := handler.NewAuthMiddleware("file_service_read", "file_service_write")
+	outerMux.Handle("/", auth(mux))
+
 	addr := ":8083"
 	log.Printf("[file-service] listening on %s (data=%s)", addr, dataDir)
-	auth := handler.NewAuthMiddleware("file_service_read", "file_service_write")
-	log.Fatal(http.ListenAndServe(addr, corsMiddleware(loggingMiddleware(auth(mux)))))
+	log.Fatal(http.ListenAndServe(addr, corsMiddleware(loggingMiddleware(outerMux))))
 }
 
 func corsMiddleware(next http.Handler) http.Handler {

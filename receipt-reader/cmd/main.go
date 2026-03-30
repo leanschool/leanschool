@@ -40,8 +40,15 @@ func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("POST /receipts/extract", h.Extract)
 
+	outerMux := http.NewServeMux()
+	outerMux.HandleFunc("GET /health", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.Write([]byte(`{"status":"ok"}`))
+	})
+	auth := handler.NewAuthMiddleware("receipt_reader_read", "receipt_reader_write")
+	outerMux.Handle("/", auth(mux))
+
 	addr := ":8080"
 	log.Printf("receipt-reader listening on %s", addr)
-	auth := handler.NewAuthMiddleware("receipt_reader_read", "receipt_reader_write")
-	log.Fatal(http.ListenAndServe(addr, handler.CORSMiddleware(handler.LoggingMiddleware(auth(mux)))))
+	log.Fatal(http.ListenAndServe(addr, handler.CORSMiddleware(handler.LoggingMiddleware(outerMux))))
 }

@@ -22,10 +22,17 @@ func main() {
 	mux.HandleFunc("GET /templates", h.GetAllTemplates)
 	mux.HandleFunc("GET /templates/{id}", h.GetTemplate)
 
+	outerMux := http.NewServeMux()
+	outerMux.HandleFunc("GET /health", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.Write([]byte(`{"status":"ok"}`))
+	})
+	auth := handler.NewAuthMiddleware("extraction_read", "extraction_write")
+	outerMux.Handle("/", auth(mux))
+
 	addr := ":8084"
 	log.Printf("[extraction-service] listening on %s", addr)
-	auth := handler.NewAuthMiddleware("extraction_read", "extraction_write")
-	log.Fatal(http.ListenAndServe(addr, corsMiddleware(loggingMiddleware(auth(mux)))))
+	log.Fatal(http.ListenAndServe(addr, corsMiddleware(loggingMiddleware(outerMux))))
 }
 
 func corsMiddleware(next http.Handler) http.Handler {

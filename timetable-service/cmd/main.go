@@ -49,10 +49,17 @@ func main() {
 	handler.NewWorkflowHandler(store, lsClient, p).RegisterRoutes(mux)
 	handler.NewSnapshotHandler(store).RegisterRoutes(mux)
 
+	outerMux := http.NewServeMux()
+	outerMux.HandleFunc("GET /health", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.Write([]byte(`{"status":"ok"}`))
+	})
+	auth := handler.NewAuthMiddleware("timetable_read", "timetable_write")
+	outerMux.Handle("/", auth(mux))
+
 	addr := ":8085"
 	log.Printf("[timetable-service] listening on %s", addr)
-	auth := handler.NewAuthMiddleware("timetable_read", "timetable_write")
-	log.Fatal(http.ListenAndServe(addr, handler.CORSMiddleware(handler.LoggingMiddleware(auth(mux)))))
+	log.Fatal(http.ListenAndServe(addr, handler.CORSMiddleware(handler.LoggingMiddleware(outerMux))))
 }
 
 func getenv(key, fallback string) string {

@@ -48,10 +48,17 @@ func main() {
 	handlers := handler.NewHandlers(store, "")
 	specMux := api.HandlerFromMux(api.NewStrictHandler(handlers, nil), mux)
 
+	outerMux := http.NewServeMux()
+	outerMux.HandleFunc("GET /health", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.Write([]byte(`{"status":"ok"}`))
+	})
+	auth := handler.NewAuthMiddleware("leanschool_read", "leanschool_write")
+	outerMux.Handle("/", auth(specMux))
+
 	addr := ":8080"
 	log.Printf("leanschool listening on %s", addr)
-	auth := handler.NewAuthMiddleware("leanschool_read", "leanschool_write")
-	log.Fatal(http.ListenAndServe(addr, handler.CORSMiddleware(handler.LoggingMiddleware(auth(specMux)))))
+	log.Fatal(http.ListenAndServe(addr, handler.CORSMiddleware(handler.LoggingMiddleware(outerMux))))
 }
 
 func getenv(key, fallback string) string {
