@@ -151,8 +151,8 @@ services:
 
   ui:
     build:
-      context: ../..
-      dockerfile: infra/dockerfiles/Dockerfile.ui
+      context: ../../leanschool-ui
+      dockerfile: ../infra/dockerfiles/Dockerfile.ui
     ports:
       - "3000:80"
     environment:
