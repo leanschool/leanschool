@@ -51,7 +51,7 @@ export default function LandingPage({ onLogin }) {
       </section>
 
       <footer className="landing-footer">
-        <span>{t.app.name} · {t.app.tagline}</span>
+        <span>{t.app.name} · {t.app.tagline} · {t.app.version} · initiated by <a href="https://xn--hbu-qla.ch">häbu.ch</a></span>
       </footer>
     </div>
   )
