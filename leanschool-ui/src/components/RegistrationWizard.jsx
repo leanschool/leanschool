@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
 import { useTranslation } from '../i18n/useTranslation'
 import { useAuth } from '../auth/useAuth'
+import { config } from '../config'
 import './RegistrationWizard.css'
 
-const API = import.meta.env.VITE_API_URL || 'http://localhost:8080'
+const API = config.leanschoolUrl
 
 const STEPS = {
   ROLE_SELECTION: 1,

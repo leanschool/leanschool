@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react'
 import { useTranslation } from '../i18n/useTranslation'
 import { useAuth } from '../auth/useAuth'
 import AuthImage from './AuthImage'
+import { config } from '../config'
 import './ReceiptForm.css'
 
-const LEANSCHOOL_URL   = import.meta.env.VITE_LEANSCHOOL_URL   || 'http://localhost:8080'
-const FILE_SERVICE_URL = import.meta.env.VITE_FILE_SERVICE_URL || 'http://localhost:8083'
+const LEANSCHOOL_URL   = config.leanschoolUrl
+const FILE_SERVICE_URL = config.fileServiceUrl
 
 export default function ReceiptForm({ receipt: initial, onSaved, onCancel }) {
   const { t } = useTranslation()

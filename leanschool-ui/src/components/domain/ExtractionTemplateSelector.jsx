@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../auth/useAuth';
 import { useTranslation } from '../../i18n/useTranslation';
+import { config } from '../../config';
 import './domain-components.css';
 
 export default function ExtractionTemplateSelector({ onSelect, dataVariables, persist = false }) {
@@ -11,7 +12,7 @@ export default function ExtractionTemplateSelector({ onSelect, dataVariables, pe
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const API = import.meta.env.VITE_EXTRACTION_SERVICE_URL || 'http://localhost:8084';
+  const API = config.extractionServiceUrl;
 
   // Fetch templates on mount
   useEffect(() => {

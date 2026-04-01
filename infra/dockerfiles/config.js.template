@@ -1,0 +1,22 @@
+window.__LS_CONFIG__ = {
+  keycloakUrl:          "${KEYCLOAK_URL}",
+  keycloakRealm:        "${KEYCLOAK_REALM}",
+  keycloakClientId:     "${KEYCLOAK_CLIENT_ID}",
+  leanschoolUrl:        "${LEANSCHOOL_URL}",
+  fileServiceUrl:       "${FILE_SERVICE_URL}",
+  receiptReaderUrl:     "${RECEIPT_READER_URL}",
+  extractionServiceUrl: "${EXTRACTION_SERVICE_URL}",
+  timetableServiceUrl:  "${TIMETABLE_SERVICE_URL}",
+  features: {
+    scan:      "${FEATURE_SCAN}",
+    submit:    "${FEATURE_SUBMIT}",
+    receipts:  "${FEATURE_RECEIPTS}",
+    export:    "${FEATURE_EXPORT}",
+    accounts:  "${FEATURE_ACCOUNTS}",
+    users:     "${FEATURE_USERS}",
+    classes:   "${FEATURE_CLASSES}",
+    data:      "${FEATURE_DATA}",
+    templates: "${FEATURE_TEMPLATES}",
+    timetable: "${FEATURE_TIMETABLE}",
+  },
+};

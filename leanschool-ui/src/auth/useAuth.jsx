@@ -1,9 +1,10 @@
 import { createContext, useCallback, useContext, useEffect, useState } from 'react'
 import { computeChallenge, generateRandomString, parseJwtPayload } from './pkce'
+import { config } from '../config'
 
-const KEYCLOAK_URL = import.meta.env.VITE_KEYCLOAK_URL  || 'http://localhost:8180'
-const REALM        = import.meta.env.VITE_KEYCLOAK_REALM || 'leanschool'
-const CLIENT_ID    = import.meta.env.VITE_KEYCLOAK_CLIENT_ID || 'leanschool-ui'
+const KEYCLOAK_URL = config.keycloakUrl
+const REALM        = config.keycloakRealm
+const CLIENT_ID    = config.keycloakClientId
 const REDIRECT_URI = window.location.origin
 
 const BASE_URL = `${KEYCLOAK_URL}/realms/${REALM}/protocol/openid-connect`

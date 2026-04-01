@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from '../i18n/useTranslation'
 import { useAuth } from '../auth/useAuth'
+import { config } from '../config'
 import './AdminRegistrationDashboard.css'
 
-const API = import.meta.env.VITE_API_URL || 'http://localhost:8080'
+const API = config.leanschoolUrl
 
 export default function AdminRegistrationDashboard({ onBack }) {
   const { t } = useTranslation()

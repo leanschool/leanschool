@@ -1,15 +1,17 @@
-// ── Feature flags (env vars, default true) ────────────────────────────────
+import { config } from '../config'
+
+// ── Feature flags (runtime config, default true) ───────────────────────────
 const FLAGS = {
-  SCAN:     import.meta.env.VITE_FEATURE_SCAN     !== 'false',
-  SUBMIT:   import.meta.env.VITE_FEATURE_SUBMIT   !== 'false',
-  RECEIPTS: import.meta.env.VITE_FEATURE_RECEIPTS !== 'false',
-  EXPORT:   import.meta.env.VITE_FEATURE_EXPORT   !== 'false',
-  ACCOUNTS: import.meta.env.VITE_FEATURE_ACCOUNTS !== 'false',
-  USERS:    import.meta.env.VITE_FEATURE_USERS    !== 'false',
-  CLASSES:  import.meta.env.VITE_FEATURE_CLASSES  !== 'false',
-  DATA:     import.meta.env.VITE_FEATURE_DATA     !== 'false',
-  TEMPLATES: import.meta.env.VITE_FEATURE_TEMPLATES !== 'false',
-  TIMETABLE: import.meta.env.VITE_FEATURE_TIMETABLE !== 'false',
+  SCAN:      config.features.scan,
+  SUBMIT:    config.features.submit,
+  RECEIPTS:  config.features.receipts,
+  EXPORT:    config.features.export,
+  ACCOUNTS:  config.features.accounts,
+  USERS:     config.features.users,
+  CLASSES:   config.features.classes,
+  DATA:      config.features.data,
+  TEMPLATES: config.features.templates,
+  TIMETABLE: config.features.timetable,
 }
 
 // ── Feature definitions ────────────────────────────────────────────────────

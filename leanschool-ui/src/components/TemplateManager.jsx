@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
 import { useTranslation } from '../i18n/useTranslation'
 import { useAuth } from '../auth/useAuth'
+import { config } from '../config'
 import './TemplateManager.css'
 
-const EXTRACTION_SERVICE_URL = import.meta.env.VITE_EXTRACTION_SERVICE_URL || 'http://localhost:8084'
+const EXTRACTION_SERVICE_URL = config.extractionServiceUrl
 
 const EMPTY_FORM = { 
   name: '', 

@@ -41,7 +41,9 @@ import ReceiptPanel from './domain/ReceiptPanel'
 
 import './DataDashboard.css'
 
-const API = import.meta.env.VITE_LEANSCHOOL_URL || 'http://localhost:8080'
+import { config } from '../config'
+
+const API = config.leanschoolUrl
 
 const MODELS = {
   location:    { enabled: false, endpoint: '/locations',      idField: 'id',     idProp: 'id',     label: e => `${e.lon ?? ''}, ${e.lat ?? ''}`,                                            View: LocationView,   Form: LocationForm   },

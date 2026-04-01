@@ -11,7 +11,7 @@ export default defineConfig({
       manifest: {
         name: 'leanschool',
         short_name: 'leanschool',
-        description: 'Smart receipts. Clear finances.',
+        description: 'Lean tools for schools',
         theme_color: '#0a0a12',
         background_color: '#0a0a12',
         display: 'standalone',

@@ -24,8 +24,9 @@ import './components/UserInfo.css'
 import './components/WhoIsWho.css'
 import './components/RegistrationWizard.css'
 import './components/AdminRegistrationDashboard.css'
+import { config } from './config'
 
-const API = import.meta.env.VITE_API_URL || 'http://localhost:8080'
+const API = config.leanschoolUrl
 
 const BUSINESS_ROLES = ['teacher', 'school-management', 'user_management']
 

@@ -3,11 +3,12 @@ import { useTranslation } from '../i18n/useTranslation'
 import { useAuth } from '../auth/useAuth'
 import AuthImage from './AuthImage'
 import ExtractionTemplateSelector from './domain/ExtractionTemplateSelector'
+import { config } from '../config'
 import './ReceiptList.css'
 
-const LEANSCHOOL_URL   = import.meta.env.VITE_LEANSCHOOL_URL   || 'http://localhost:8080'
-const FILE_SERVICE_URL = import.meta.env.VITE_FILE_SERVICE_URL || 'http://localhost:8083'
-const EXTRACTION_SERVICE_URL = import.meta.env.VITE_EXTRACTION_SERVICE_URL || 'http://localhost:8084'
+const LEANSCHOOL_URL         = config.leanschoolUrl
+const FILE_SERVICE_URL       = config.fileServiceUrl
+const EXTRACTION_SERVICE_URL = config.extractionServiceUrl
 
 const STATUS_ORDER = ['unsubmitted', 'submitted', 'accepted', 'declined']
 

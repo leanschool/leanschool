@@ -2,10 +2,11 @@ import { useRef, useState } from 'react'
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera'
 import { useTranslation } from '../i18n/useTranslation'
 import { useAuth } from '../auth/useAuth'
+import { config } from '../config'
 import './ScanReceipt.css'
 
-const TESSERACT_URL    = import.meta.env.VITE_RECEIPT_READER_URL || 'http://localhost:8081'
-const FILE_SERVICE_URL = import.meta.env.VITE_FILE_SERVICE_URL || 'http://localhost:8083'
+const TESSERACT_URL    = config.receiptReaderUrl
+const FILE_SERVICE_URL = config.fileServiceUrl
 
 export default function ScanReceipt({ onExtracted, onCancel }) {
   const { t } = useTranslation()

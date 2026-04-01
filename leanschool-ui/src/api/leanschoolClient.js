@@ -1,7 +1,8 @@
 import createClient from 'openapi-fetch'
 import { useAuth } from '../auth/useAuth'
+import { config } from '../config'
 
-const BASE_URL = import.meta.env.VITE_LEANSCHOOL_URL || 'http://localhost:8080'
+const BASE_URL = config.leanschoolUrl
 
 /**
  * Returns a type-safe openapi-fetch client for the leanschool API,

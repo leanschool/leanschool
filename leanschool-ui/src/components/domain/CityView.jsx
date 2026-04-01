@@ -3,7 +3,9 @@ import { useAuth } from '../../auth/useAuth'
 import { useTranslation } from '../../i18n/useTranslation'
 import './domain-components.css'
 
-const API = import.meta.env.VITE_LEANSCHOOL_URL || 'http://localhost:8080'
+import { config } from '../../config'
+
+const API = config.leanschoolUrl
 
 export default function CityView({ id }) {
   const { t } = useTranslation()

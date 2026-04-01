@@ -3,7 +3,9 @@ import { useTranslation } from '../i18n/useTranslation'
 import { useAuth } from '../auth/useAuth'
 import './AccountManager.css'
 
-const LEANSCHOOL_URL = import.meta.env.VITE_LEANSCHOOL_URL || 'http://localhost:8080'
+import { config } from '../config'
+
+const LEANSCHOOL_URL = config.leanschoolUrl
 
 const EMPTY_FORM = { name: '', shortcut: '', budget: '', classId: '', validFrom: '', validTo: '' }
 

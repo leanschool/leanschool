@@ -151,10 +151,19 @@ services:
 
   ui:
     build:
-      context: ../../leanschool-ui
-      dockerfile: ../infra/dockerfiles/Dockerfile.ui
+      context: ../..
+      dockerfile: infra/dockerfiles/Dockerfile.ui
     ports:
       - "3000:80"
+    environment:
+      KEYCLOAK_URL: http://localhost:8180
+      KEYCLOAK_REALM: leanschool
+      KEYCLOAK_CLIENT_ID: leanschool-ui
+      LEANSCHOOL_URL: http://localhost:8080
+      FILE_SERVICE_URL: http://localhost:8083
+      RECEIPT_READER_URL: http://localhost:8081
+      EXTRACTION_SERVICE_URL: http://localhost:8084
+      TIMETABLE_SERVICE_URL: http://localhost:8085
     depends_on:
       - leanschool
       - receipt-reader

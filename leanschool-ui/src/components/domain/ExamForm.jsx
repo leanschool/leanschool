@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../../auth/useAuth';
 import { useTranslation } from '../../i18n/useTranslation';
 import './domain-components.css';
+import { config } from '../../config';
 
-const API = import.meta.env.VITE_LEANSCHOOL_URL || 'http://localhost:8080';
+const API = config.leanschoolUrl;
 
 export default function ExamForm({ id, persist = false, onSave, onCancel }) {
   const { t } = useTranslation();

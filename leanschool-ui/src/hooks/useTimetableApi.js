@@ -1,6 +1,7 @@
 import { useAuth } from '../auth/useAuth'
+import { config } from '../config'
 
-const API = import.meta.env.VITE_TIMETABLE_SERVICE_URL || 'http://localhost:8085'
+const API = config.timetableServiceUrl
 
 export function useTimetableApi() {
   const { authFetch } = useAuth()
