@@ -39,25 +39,46 @@ function AppContent() {
 
   // User status fetched from backend for authenticated users.
   const [userStatus, setUserStatus] = useState(null)
-  const [statusLoading, setStatusLoading] = useState(false)
+  // Start true when tokens exist so no dashboard flash before /users/me resolves.
+  const [statusLoading, setStatusLoading] = useState(!!tokens)
+  const [statusError, setStatusError] = useState(false)
+  const [retryCount, setRetryCount] = useState(0)
 
   // Fetch /users/me whenever the user becomes authenticated.
   useEffect(() => {
-    if (!tokens || !user) return
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (!tokens || !user) {
+      setStatusLoading(false)
+      return
+    }
     setStatusLoading(true)
+    setStatusError(false)
     authFetch(`${API}/users/me`)
-      .then(res => res.ok ? res.json() : null)
+      .then(res => {
+        if (!res.ok) throw new Error(`users/me ${res.status}`)
+        return res.json()
+      })
       .then(data => setUserStatus(data))
-      .catch(() => setUserStatus(null))
+      .catch(() => setStatusError(true))
       .finally(() => setStatusLoading(false))
-  }, [tokens, user?.sub]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [tokens, user?.sub, retryCount]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Show a minimal loading screen while the auth callback is being processed.
-  if (loading || (tokens && statusLoading && !userStatus)) {
+  if (loading || (tokens && statusLoading)) {
     return (
       <div style={{ minHeight: '100svh', background: 'var(--bg-page)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ color: 'var(--text-3)', fontSize: 15 }}>Loading…</div>
+        <LangDropdown solo />
+        <ThemeToggle solo />
+      </div>
+    )
+  }
+
+  // API error fetching user status — show retry screen (never fall through to Dashboard).
+  if (tokens && statusError) {
+    return (
+      <div style={{ minHeight: '100svh', background: 'var(--bg-page)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 16 }}>
+        <div style={{ color: 'var(--text-3)', fontSize: 15 }}>Unable to reach server.</div>
+        <button className="ghost-button" onClick={() => setRetryCount(c => c + 1)}>Retry</button>
         <LangDropdown solo />
         <ThemeToggle solo />
       </div>
@@ -80,7 +101,9 @@ function AppContent() {
   const roles = getUserRoles(user)
   const hasBusinessRole = BUSINESS_ROLES.some(r => roles.includes(r))
 
-  if (!hasBusinessRole && userStatus) {
+  if (!hasBusinessRole) {
+    // Non-business users must always have a valid userStatus — never fall through to Dashboard.
+    if (!userStatus) return null
     const rs = userStatus.registrationStatus
     if (rs === 'none') {
       return (
