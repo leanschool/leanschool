@@ -148,6 +148,7 @@
 .landing .cta-button {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   padding: 18px 40px;
   border-radius: 16px;

@@ -54,10 +54,11 @@ function AppContent() {
     setStatusError(false)
     authFetch(`${API}/users/me`)
       .then(res => {
+        if (res.status === 401) { login(); return }
         if (!res.ok) throw new Error(`users/me ${res.status}`)
         return res.json()
       })
-      .then(data => setUserStatus(data))
+      .then(data => { if (data) setUserStatus(data) })
       .catch(() => setStatusError(true))
       .finally(() => setStatusLoading(false))
   }, [tokens, user?.sub, retryCount]) // eslint-disable-line react-hooks/exhaustive-deps
