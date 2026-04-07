@@ -48,13 +48,13 @@ export default function AdminRegistrationDashboard({ onBack }) {
   function statusLabel(status) {
     if (status === 'pending')  return <span className="ard-badge ard-badge-pending">{t.userManagement.statusPending}</span>
     if (status === 'approved') return <span className="ard-badge ard-badge-approved">{t.userManagement.statusApproved}</span>
-    if (status === 'rejected')  return <span className="ard-badge ard-badge-rejected">{t.userManagement.statusDenied}</span>
+    if (status === 'denied')   return <span className="ard-badge ard-badge-denied">{t.userManagement.statusDenied}</span>
     return <span className="ard-badge">{status}</span>
   }
 
   const filteredRequests = requests.filter(req => {
-    const matchesStatus = filterStatus === 'all' || req.status === filterStatus
-    const matchesSearch = searchTerm === '' || 
+    const matchesStatus = filterStatus === 'all' || req.approvalStatus === filterStatus
+    const matchesSearch = searchTerm === '' ||
       req.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
       req.desiredRoles.some(role => role.toLowerCase().includes(searchTerm.toLowerCase()))
     return matchesStatus && matchesSearch
@@ -97,7 +97,7 @@ export default function AdminRegistrationDashboard({ onBack }) {
               <option value="all">{t.userManagement.filterAll}</option>
               <option value="pending">{t.userManagement.statusPending}</option>
               <option value="approved">{t.userManagement.statusApproved}</option>
-              <option value="rejected">{t.userManagement.statusDenied}</option>
+              <option value="denied">{t.userManagement.statusDenied}</option>
             </select>
           </div>
         </div>
@@ -123,13 +123,13 @@ export default function AdminRegistrationDashboard({ onBack }) {
               </thead>
               <tbody>
                 {filteredRequests.map(req => (
-                  <tr key={req.id} className={`ard-row ard-row-${req.status}`}>
+                  <tr key={req.id} className={`ard-row ard-row-${req.approvalStatus}`}>
                     <td>{req.email}</td>
                     <td>{req.desiredRoles?.join(', ')}</td>
-                    <td>{statusLabel(req.status)}</td>
+                    <td>{statusLabel(req.approvalStatus)}</td>
                     <td>{new Date(req.createdAt).toLocaleString()}</td>
                     <td className="ard-actions">
-                      {req.status === 'pending' && (
+                      {req.approvalStatus === 'pending' && (
                         <>
                           <button
                             className="ard-btn ard-btn-approve"
@@ -147,7 +147,7 @@ export default function AdminRegistrationDashboard({ onBack }) {
                           </button>
                         </>
                       )}
-                      {req.status === 'approved' && (
+                      {req.approvalStatus === 'approved' && (
                         <button
                           className="ard-btn ard-btn-secondary"
                           disabled={acting !== null}

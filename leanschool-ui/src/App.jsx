@@ -6,7 +6,6 @@ import LandingPage from './components/LandingPage'
 import Dashboard from './components/Dashboard'
 import ScanReceipt from './components/ScanReceipt'
 import ReceiptForm from './components/ReceiptForm'
-import SchoolClassManager from './components/SchoolClassManager'
 import UserInfo from './components/UserInfo'
 import LangDropdown from './components/LangDropdown'
 import ThemeToggle from './components/ThemeToggle'
@@ -180,8 +179,6 @@ function AppContent() {
     content = <SuccessScreen onReset={() => setView('scan')} onBack={() => setView('dashboard')} />
   } else if (view === 'users') {
     content = <AdminRegistrationDashboard onBack={() => setView('dashboard')} />
-  } else if (view === 'classes') {
-    content = <SchoolClassManager onBack={() => setView('dashboard')} />
   } else if (view === 'profile') {
     content = <WelcomePage onDone={() => setView('dashboard')} />
   } else if (view === 'data') {

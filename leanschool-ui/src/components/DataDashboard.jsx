@@ -298,11 +298,10 @@ export default function DataDashboard({ onBack }) {
       <div className="orb orb-1" />
       <div className="orb orb-2" />
 
+      <button className="page-back-btn" onClick={onBack}>← {t.dataDashboard.backToDashboard}</button>
+
       <nav className="dd-nav">
         <img src="/logo.svg" alt="leanschool" className="dd-nav-logo" />
-        <button className="ghost-button dd-nav-back" onClick={onBack}>
-          ← {t.dataDashboard.backToDashboard}
-        </button>
       </nav>
 
       <div className="dd-layout">

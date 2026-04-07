@@ -233,11 +233,11 @@ func (p *Postgres) migrate(ctx context.Context) error {
 			desired_roles        TEXT[] NOT NULL,
 			current_roles        TEXT[] NOT NULL DEFAULT '{}',
 			approval_status      TEXT NOT NULL DEFAULT 'pending',
-			approval_by          TEXT REFERENCES user_registry(id),
+			approval_by          TEXT,
 			approval_at          TIMESTAMPTZ,
 			approval_notes       TEXT,
 			rejection_reason     TEXT,
-			rejection_by         TEXT REFERENCES user_registry(id),
+			rejection_by         TEXT,
 			rejection_at         TIMESTAMPTZ,
 			requires_manual_approval BOOLEAN NOT NULL DEFAULT TRUE,
 			auto_approval_rules  JSONB,
@@ -455,6 +455,10 @@ func (p *Postgres) migrate(ctx context.Context) error {
 			student_id TEXT REFERENCES students(person_id),
 			version    INT NOT NULL DEFAULT 0
 		);
+
+		-- Drop FK constraints on audit columns that store Keycloak subs, not user_registry ids.
+		ALTER TABLE registration_workflow DROP CONSTRAINT IF EXISTS registration_workflow_approval_by_fkey;
+		ALTER TABLE registration_workflow DROP CONSTRAINT IF EXISTS registration_workflow_rejection_by_fkey;
 	`)
 	return err
 }
@@ -2202,13 +2206,14 @@ func (p *Postgres) UpdateRegistrationWorkflow(ctx context.Context, workflow *mod
 		return fmt.Errorf("marshaling request data: %w", err)
 	}
 
-	// Convert auto approval rules to JSONB
-	var autoApprovalRulesJSON []byte
+	// Convert auto approval rules to JSONB; pass nil so Postgres stores NULL when empty.
+	var autoApprovalRulesJSON interface{}
 	if workflow.AutoApprovalRules != nil {
-		autoApprovalRulesJSON, err = json.Marshal(workflow.AutoApprovalRules)
-		if err != nil {
-			return fmt.Errorf("marshaling auto approval rules: %w", err)
+		b, merr := json.Marshal(workflow.AutoApprovalRules)
+		if merr != nil {
+			return fmt.Errorf("marshaling auto approval rules: %w", merr)
 		}
+		autoApprovalRulesJSON = b
 	}
 
 	_, err = p.db.ExecContext(ctx,

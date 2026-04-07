@@ -3,7 +3,7 @@ import { useAuth } from '../auth/useAuth'
 import { hasFeature } from '../auth/permissions'
 import './Dashboard.css'
 
-export default function Dashboard({ onScan, onManageUsers, onManageClasses, onManageData, onManageTemplates, onTimetablePlanner }) {
+export default function Dashboard({ onScan, onManageUsers, onManageData, onManageTemplates, onTimetablePlanner }) {
   const { t } = useTranslation()
   const { user } = useAuth()
 
@@ -21,12 +21,6 @@ export default function Dashboard({ onScan, onManageUsers, onManageClasses, onMa
       title: t.dashboard.usersCard.title,
       body:  t.dashboard.usersCard.body,
       onClick: onManageUsers,
-    },
-    hasFeature(user, 'manageClasses') && {
-      icon: '◈',
-      title: t.dashboard.classesCard.title,
-      body:  t.dashboard.classesCard.body,
-      onClick: onManageClasses,
     },
     hasFeature(user, 'manageData') && {
       icon: '⬡',

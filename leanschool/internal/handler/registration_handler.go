@@ -2,6 +2,7 @@ package handler
 
 import (
 	"encoding/json"
+	"io"
 	"log"
 	"net/http"
 	"time"
@@ -180,11 +181,11 @@ func (h *RegistrationHandler) Approve(w http.ResponseWriter, r *http.Request) {
 	var req struct {
 		Notes string `json:"notes"`
 	}
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil && err != io.EOF {
 		http.Error(w, "invalid request body: "+err.Error(), http.StatusBadRequest)
 		return
 	}
-	
+
 	// Get workflow
 	workflow, err := h.store.GetRegistrationWorkflow(r.Context(), id)
 	if err != nil {
@@ -230,16 +231,11 @@ func (h *RegistrationHandler) Reject(w http.ResponseWriter, r *http.Request) {
 	var req struct {
 		Reason string `json:"reason"`
 	}
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil && err != io.EOF {
 		http.Error(w, "invalid request body: "+err.Error(), http.StatusBadRequest)
 		return
 	}
-	
-	if req.Reason == "" {
-		http.Error(w, "reason is required", http.StatusBadRequest)
-		return
-	}
-	
+
 	// Get workflow
 	workflow, err := h.store.GetRegistrationWorkflow(r.Context(), id)
 	if err != nil {
