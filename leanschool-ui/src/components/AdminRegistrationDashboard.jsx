@@ -147,15 +147,7 @@ export default function AdminRegistrationDashboard({ onBack }) {
                           </button>
                         </>
                       )}
-                      {req.approvalStatus === 'approved' && (
-                        <button
-                          className="ard-btn ard-btn-secondary"
-                          disabled={acting !== null}
-                          onClick={() => act(req.id, 'cancel')}
-                        >
-                          {t.userManagement.cancel}
-                        </button>
-                      )}
+                      {/* Cancel is only valid for pending workflows */}
                     </td>
                   </tr>
                 ))}

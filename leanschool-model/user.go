@@ -37,6 +37,7 @@ type UserProfile struct {
 
 type UserStatus struct {
 	RegistrationStatus RegistrationStatus `json:"registrationStatus"` // "none"|"pending"|"approved"|"denied"
+	RejectionReason    string             `json:"rejectionReason,omitempty"`
 	ProfileComplete    bool               `json:"profileComplete"`
 	ProfileSkipped     bool               `json:"profileSkipped"`
 }

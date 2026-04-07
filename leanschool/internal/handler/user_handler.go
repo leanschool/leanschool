@@ -53,7 +53,7 @@ func hasRole(claims *jwtClaims, role string) bool {
 
 func (h *UserHandler) ListTeachers(w http.ResponseWriter, r *http.Request) {
 	claims := ClaimsFromContext(r.Context())
-	if !hasRole(claims, "user-management") {
+	if !hasRole(claims, "user_management_read") {
 		http.Error(w, "Forbidden", http.StatusForbidden)
 		return
 	}
@@ -159,16 +159,57 @@ func (h *UserHandler) Me(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	reg, err := h.store.GetRegistrationRequestByUserSub(r.Context(), claims.Sub)
-	if err != nil {
-		http.Error(w, "internal error: "+err.Error(), http.StatusInternalServerError)
-		return
-	}
-
 	status := model.UserStatus{
 		RegistrationStatus: model.RegistrationStatus("none"),
 		ProfileComplete:    false,
 		ProfileSkipped:     false,
+	}
+
+	// 1. Check new user_registry + registration_workflow tables first
+	userReg, err := h.store.GetUserRegistryBySub(r.Context(), claims.Sub)
+	if err != nil {
+		log.Printf("[user-handler] GetUserRegistryBySub failed: %v", err)
+		http.Error(w, "internal error", http.StatusInternalServerError)
+		return
+	}
+
+	if userReg != nil {
+		// User found in new system — derive status from user_registry
+		status.RegistrationStatus = userReg.RegistrationStatus
+
+		// Check the latest workflow for more detail (approval status, rejection reason)
+		if userReg.RegistrationStatus == model.RegistrationStatusPending || userReg.RegistrationStatus == model.RegistrationStatusDenied {
+			wf, err := h.store.GetLatestWorkflowByUserID(r.Context(), userReg.ID)
+			if err != nil {
+				log.Printf("[user-handler] GetLatestWorkflowByUserID failed: %v", err)
+			} else if wf != nil {
+				status.RegistrationStatus = model.RegistrationStatus(wf.ApprovalStatus)
+				if wf.RejectionReason != "" {
+					status.RejectionReason = wf.RejectionReason
+				}
+			}
+		}
+
+		profile, err := h.store.GetUserProfile(r.Context(), claims.Sub)
+		if err != nil {
+			log.Printf("[user-handler] GetUserProfile failed: %v", err)
+		}
+		if profile != nil {
+			status.ProfileComplete = profile.ProfileComplete
+			status.ProfileSkipped = profile.ProfileSkipped
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(status)
+		return
+	}
+
+	// 2. Fall back to legacy registration_requests table
+	reg, err := h.store.GetRegistrationRequestByUserSub(r.Context(), claims.Sub)
+	if err != nil {
+		log.Printf("[user-handler] GetRegistrationRequestByUserSub failed: %v", err)
+		http.Error(w, "internal error", http.StatusInternalServerError)
+		return
 	}
 
 	if reg != nil {
@@ -176,8 +217,7 @@ func (h *UserHandler) Me(w http.ResponseWriter, r *http.Request) {
 
 		profile, err := h.store.GetUserProfile(r.Context(), claims.Sub)
 		if err != nil {
-			http.Error(w, "internal error: "+err.Error(), http.StatusInternalServerError)
-			return
+			log.Printf("[user-handler] GetUserProfile failed: %v", err)
 		}
 		if profile != nil {
 			status.ProfileComplete = profile.ProfileComplete
@@ -311,7 +351,7 @@ func (h *UserHandler) UpsertProfile(w http.ResponseWriter, r *http.Request) {
 
 func (h *UserHandler) ListRegistrations(w http.ResponseWriter, r *http.Request) {
 	claims := ClaimsFromContext(r.Context())
-	if !hasRole(claims, "user-management") {
+	if !hasRole(claims, "user_management_read") {
 		http.Error(w, "Forbidden", http.StatusForbidden)
 		return
 	}
@@ -333,7 +373,7 @@ func (h *UserHandler) ListRegistrations(w http.ResponseWriter, r *http.Request) 
 
 func (h *UserHandler) Approve(w http.ResponseWriter, r *http.Request) {
 	claims := ClaimsFromContext(r.Context())
-	if !hasRole(claims, "user-management") {
+	if !hasRole(claims, "user_management_write") {
 		http.Error(w, "Forbidden", http.StatusForbidden)
 		return
 	}
@@ -370,7 +410,7 @@ func (h *UserHandler) Approve(w http.ResponseWriter, r *http.Request) {
 
 func (h *UserHandler) Deny(w http.ResponseWriter, r *http.Request) {
 	claims := ClaimsFromContext(r.Context())
-	if !hasRole(claims, "user-management") {
+	if !hasRole(claims, "user_management_write") {
 		http.Error(w, "Forbidden", http.StatusForbidden)
 		return
 	}

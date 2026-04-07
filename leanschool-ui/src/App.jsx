@@ -117,7 +117,7 @@ function AppContent() {
     if (rs === 'pending') {
       return (
         <>
-          <AwaitingApproval />
+          <AwaitingApproval onStatusChange={(data) => setUserStatus({ ...userStatus, ...data })} />
           <LangDropdown solo />
           <ThemeToggle solo />
         </>
@@ -126,7 +126,10 @@ function AppContent() {
     if (rs === 'denied') {
       return (
         <>
-          <DeniedScreen />
+          <DeniedScreen
+            rejectionReason={userStatus.rejectionReason}
+            onReApply={() => setUserStatus({ ...userStatus, registrationStatus: 'none' })}
+          />
           <LangDropdown solo />
           <ThemeToggle solo />
         </>

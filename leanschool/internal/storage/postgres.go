@@ -2108,6 +2108,73 @@ func (p *Postgres) GetRegistrationWorkflow(ctx context.Context, id string) (*mod
 	return workflow, nil
 }
 
+func (p *Postgres) GetLatestWorkflowByUserID(ctx context.Context, userID string) (*model.RegistrationWorkflow, error) {
+	workflow := &model.RegistrationWorkflow{}
+	var wUserID, requestType, approvalStatus sql.NullString
+	var approvalBy, rejectionBy, rejectionReason, pendingTeacherID, pendingStudentID, pendingGuardianID sql.NullString
+	var approvalNotes sql.NullString
+	var approvalAt, rejectionAt, completedAt sql.NullTime
+	var requestDataJSON, autoApprovalRulesJSON []byte
+
+	err := p.db.QueryRowContext(ctx,
+		`SELECT id, user_id, request_type, request_data, desired_roles, current_roles,
+		 approval_status, approval_by, approval_at, approval_notes, rejection_reason,
+		 rejection_by, rejection_at, requires_manual_approval, auto_approval_rules,
+		 pending_teacher_id, pending_student_id, pending_guardian_id,
+		 created_at, updated_at, completed_at
+		 FROM registration_workflow WHERE user_id = $1 ORDER BY created_at DESC LIMIT 1`, userID,
+	).Scan(&workflow.ID, &wUserID, &requestType, &requestDataJSON, pq.Array(&workflow.DesiredRoles),
+		pq.Array(&workflow.CurrentRoles), &approvalStatus, &approvalBy, &approvalAt,
+		&approvalNotes, &rejectionReason, &rejectionBy, &rejectionAt,
+		&workflow.RequiresManualApproval, &autoApprovalRulesJSON, &pendingTeacherID,
+		&pendingStudentID, &pendingGuardianID, &workflow.CreatedAt, &workflow.UpdatedAt, &completedAt,
+	)
+
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, nil
+		}
+		return nil, fmt.Errorf("getting latest workflow by user ID: %w", err)
+	}
+
+	workflow.UserID = wUserID.String
+	workflow.RequestType = requestType.String
+	workflow.ApprovalStatus = approvalStatus.String
+	workflow.ApprovalBy = approvalBy.String
+	workflow.ApprovalNotes = approvalNotes.String
+	workflow.RejectionReason = rejectionReason.String
+	workflow.RejectionBy = rejectionBy.String
+	workflow.PendingTeacherID = pendingTeacherID.String
+	workflow.PendingStudentID = pendingStudentID.String
+	workflow.PendingGuardianID = pendingGuardianID.String
+
+	if approvalAt.Valid {
+		t := time.Time(approvalAt.Time)
+		workflow.ApprovalAt = &t
+	}
+	if rejectionAt.Valid {
+		t := time.Time(rejectionAt.Time)
+		workflow.RejectionAt = &t
+	}
+	if completedAt.Valid {
+		t := time.Time(completedAt.Time)
+		workflow.CompletedAt = &t
+	}
+
+	if len(requestDataJSON) > 0 {
+		if err := json.Unmarshal(requestDataJSON, &workflow.RequestData); err != nil {
+			return nil, fmt.Errorf("unmarshaling request data: %w", err)
+		}
+	}
+	if len(autoApprovalRulesJSON) > 0 {
+		if err := json.Unmarshal(autoApprovalRulesJSON, &workflow.AutoApprovalRules); err != nil {
+			return nil, fmt.Errorf("unmarshaling auto approval rules: %w", err)
+		}
+	}
+
+	return workflow, nil
+}
+
 func (p *Postgres) ListRegistrationWorkflows(ctx context.Context, statusFilter string) ([]*model.RegistrationWorkflow, error) {
 	var query string
 	var params []interface{}

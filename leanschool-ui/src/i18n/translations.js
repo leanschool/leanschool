@@ -223,10 +223,13 @@ const translations = {
     awaiting: {
       title: 'Awaiting Approval',
       subtitle: 'Your registration request has been received. An administrator will review it shortly.',
+      polling: 'This page updates automatically.',
     },
     denied: {
       title: 'Access Denied',
       subtitle: 'Your registration request was not approved. Please contact an administrator.',
+      reasonLabel: 'Reason:',
+      reApply: 'Submit New Request',
     },
     welcome: {
       title: 'Welcome to LeanSchool!',
@@ -722,10 +725,13 @@ const translations = {
     awaiting: {
       title: 'Warte auf Genehmigung',
       subtitle: 'Deine Registrierungsanfrage wurde erhalten. Ein Administrator wird sie prüfen.',
+      polling: 'Diese Seite aktualisiert sich automatisch.',
     },
     denied: {
       title: 'Zugang verweigert',
       subtitle: 'Deine Anfrage wurde abgelehnt. Bitte wende dich an einen Administrator.',
+      reasonLabel: 'Grund:',
+      reApply: 'Neuen Antrag stellen',
     },
     welcome: {
       title: 'Willkommen bei LeanSchool!',
@@ -1157,10 +1163,13 @@ const translations = {
     awaiting: {
       title: 'En attente d\'approbation',
       subtitle: 'Votre demande d\'inscription a été reçue. Un administrateur la traitera prochainement.',
+      polling: 'Cette page se met à jour automatiquement.',
     },
     denied: {
       title: 'Accès refusé',
       subtitle: 'Votre demande d\'inscription n\'a pas été approuvée. Contactez un administrateur.',
+      reasonLabel: 'Motif :',
+      reApply: 'Soumettre une nouvelle demande',
     },
     welcome: {
       title: 'Bienvenue sur LeanSchool !',
@@ -1592,10 +1601,13 @@ const translations = {
     awaiting: {
       title: 'In attesa di approvazione',
       subtitle: 'La tua richiesta di registrazione è stata ricevuta. Un amministratore la esaminerà a breve.',
+      polling: 'Questa pagina si aggiorna automaticamente.',
     },
     denied: {
       title: 'Accesso negato',
       subtitle: 'La tua richiesta di registrazione non è stata approvata. Contatta un amministratore.',
+      reasonLabel: 'Motivo:',
+      reApply: 'Invia una nuova richiesta',
     },
     welcome: {
       title: 'Benvenuto su LeanSchool!',

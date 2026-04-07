@@ -32,6 +32,37 @@
   margin: 0 0 2rem;
 }
 
+.reg-hint {
+  color: var(--text-3);
+  font-size: 0.82rem;
+  margin: -1rem 0 1.5rem;
+}
+
+.reg-rejection-reason {
+  background: var(--bg-card, #f9f0f0);
+  border-left: 3px solid var(--danger, #c0392b);
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin: 0 0 1.5rem;
+  text-align: left;
+}
+.reg-rejection-reason strong {
+  color: var(--text-1);
+  font-size: 0.85rem;
+}
+.reg-rejection-reason p {
+  color: var(--text-2);
+  font-size: 0.9rem;
+  margin: 0.25rem 0 0;
+}
+
+.reg-button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+
 .reg-form {
   display: flex;
   flex-direction: column;

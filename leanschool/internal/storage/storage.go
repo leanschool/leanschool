@@ -52,6 +52,7 @@ type Storage interface {
 	// registration workflow
 	CreateRegistrationWorkflow(ctx context.Context, workflow *model.RegistrationWorkflow) error
 	GetRegistrationWorkflow(ctx context.Context, id string) (*model.RegistrationWorkflow, error)
+	GetLatestWorkflowByUserID(ctx context.Context, userID string) (*model.RegistrationWorkflow, error)
 	ListRegistrationWorkflows(ctx context.Context, statusFilter string) ([]*model.RegistrationWorkflow, error)
 	UpdateRegistrationWorkflow(ctx context.Context, workflow *model.RegistrationWorkflow) error
 

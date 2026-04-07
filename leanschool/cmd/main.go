@@ -41,7 +41,7 @@ func main() {
 	handler.NewAccountHandler(store).RegisterRoutes(mux)
 	handler.NewUserHandler(store, kc).RegisterRoutes(mux)
 	handler.NewUserRegistryHandler(store).RegisterRoutes(mux)
-	handler.NewRegistrationHandler(store).RegisterRoutes(mux)
+	handler.NewRegistrationHandler(store, kc).RegisterRoutes(mux)
 	handler.NewRoleHandler(store).RegisterRoutes(mux)
 
 	// Spec-driven handlers: all domain CRUD + receipts (generated routing from OpenAPI spec)
