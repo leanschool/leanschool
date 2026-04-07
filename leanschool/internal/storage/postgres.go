@@ -192,8 +192,8 @@ func (p *Postgres) migrate(ctx context.Context) error {
 			created_at        TIMESTAMPTZ NOT NULL DEFAULT NOW(),
 			updated_at        TIMESTAMPTZ NOT NULL DEFAULT NOW(),
 			last_login_at     TIMESTAMPTZ,
-			created_by        TEXT REFERENCES user_registry(id),
-			updated_by        TEXT REFERENCES user_registry(id),
+			created_by        TEXT,
+			updated_by        TEXT,
 			legacy_profile_id TEXT REFERENCES user_profiles(user_sub),
 			legacy_request_id TEXT REFERENCES registration_requests(user_sub)
 		);
@@ -281,6 +281,10 @@ func (p *Postgres) migrate(ctx context.Context) error {
 		ALTER TABLE accounts ADD COLUMN IF NOT EXISTS class_id TEXT REFERENCES school_classes(id);
 		ALTER TABLE registration_requests ADD COLUMN IF NOT EXISTS class_ids TEXT[] NOT NULL DEFAULT '{}';
 		ALTER TABLE user_profiles ADD COLUMN IF NOT EXISTS class_ids TEXT[] NOT NULL DEFAULT '{}';
+
+		-- Drop self-referencing FKs on audit columns (admins may not be in user_registry)
+		ALTER TABLE user_registry DROP CONSTRAINT IF EXISTS user_registry_created_by_fkey;
+		ALTER TABLE user_registry DROP CONSTRAINT IF EXISTS user_registry_updated_by_fkey;
 
 		-- Indexes for new user management tables
 		CREATE INDEX IF NOT EXISTS idx_user_registry_person_id ON user_registry(person_id);

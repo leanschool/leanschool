@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { I18nProvider, useTranslation } from './i18n/useTranslation'
 import { AuthProvider, useAuth } from './auth/useAuth'
 import { getUserRoles } from './auth/permissions'
@@ -44,23 +44,27 @@ function AppContent() {
   const [retryCount, setRetryCount] = useState(0)
 
   // Fetch /users/me whenever the user becomes authenticated.
-  useEffect(() => {
+  const fetchUserStatus = useCallback(async () => {
     if (!tokens || !user) {
       setStatusLoading(false)
       return
     }
     setStatusLoading(true)
     setStatusError(false)
-    authFetch(`${API}/users/me`)
-      .then(res => {
-        if (res.status === 401) { login(); return }
-        if (!res.ok) throw new Error(`users/me ${res.status}`)
-        return res.json()
-      })
-      .then(data => { if (data) setUserStatus(data) })
-      .catch(() => setStatusError(true))
-      .finally(() => setStatusLoading(false))
-  }, [tokens, user?.sub, retryCount]) // eslint-disable-line react-hooks/exhaustive-deps
+    try {
+      const res = await authFetch(`${API}/users/me`)
+      if (res.status === 401) { login(); return }
+      if (!res.ok) throw new Error(`users/me ${res.status}`)
+      const data = await res.json()
+      setUserStatus(data)
+    } catch {
+      setStatusError(true)
+    } finally {
+      setStatusLoading(false)
+    }
+  }, [tokens, user, authFetch, login])
+
+  useEffect(() => { fetchUserStatus() }, [fetchUserStatus, retryCount])
 
   // Show a minimal loading screen while the auth callback is being processed.
   if (loading || (tokens && statusLoading)) {
